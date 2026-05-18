@@ -592,7 +592,7 @@ public final class DaggerMiniMaxTokenApp_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectMiniMaxTokenApp(MiniMaxTokenApp miniMaxTokenApp) {
+    public void injectMiniMaxTokenApp(MiniMaxTokenApp arg0) {
     }
 
     @Override

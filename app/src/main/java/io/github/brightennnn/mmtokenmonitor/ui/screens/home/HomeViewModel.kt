@@ -20,7 +20,8 @@ data class HomeUiState(
     val quotas: List<io.github.brightennnn.mmtokenmonitor.domain.model.ModelQuota> = emptyList(),
     val isLoading: Boolean = false,
     val error: String? = null,
-    val hasKey: Boolean = false
+    val hasKey: Boolean = false,
+    val isRefreshing: Boolean = false
 )
 
 @HiltViewModel

@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "io.github.brightennnn.mmtokenmonitor.app-mergeReleaseResources-2:/values-hdpi-v4/values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "/root/.gradle/caches/transforms-4/0ff7375d446b4eda942a94fae2869ccf/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    }
+                }
+            ]
+        }
+    ]
+}

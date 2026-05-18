@@ -43,15 +43,14 @@ fun SettingsCreditsScreen(
                             contentDescription = "返回"
                         )
                     }
-                },
-                windowInsets = WindowInsets(0.dp)
+                }
             )
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 64.dp)
+                .padding(top = innerPadding.calculateTopPadding())
                 .verticalScroll(rememberScrollState())
         ) {
             CreditsItem(

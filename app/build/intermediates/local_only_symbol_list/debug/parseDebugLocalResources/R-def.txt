@@ -20,8 +20,6 @@ drawable ic_launcher_foreground_text
 drawable ic_launcher_monochrome
 drawable ic_minimax
 drawable ic_vervedo
-drawable liquid_fill_frame
-drawable weekly_wave_progress
 drawable widget_background
 drawable widget_progress_bar
 drawable widget_progress_bar_error
@@ -57,8 +55,6 @@ string widget_combined_description
 string widget_interval_description
 string widget_weekly_description
 style Theme.MiniMaxToken
-xml anim_weekly_widget_info
-xml canvas_interval_widget_info
 xml glance_interval_widget_info
 xml glance_weekly_widget_info
 xml widget_info

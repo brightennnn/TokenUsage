@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "io.github.brightennnn.mmtokenmonitor.app-mergeReleaseResources-2:/values-v30/values-v30.xml",
+            "map": [
+                {
+                    "source": "/root/.gradle/caches/transforms-4/c8dd8de9af365e2def0445ae66cbe2f1/transformed/jetified-material3-release/res/values-v30/values-v30.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "72",
+                        "endOffsets": "123"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryBackground">@android:color/system_accent2_800</color>
+    <color name="primaryForeground">@android:color/system_accent1_200</color>
+    <color name="widget_background">#FF1C1B1F</color>
+    <color name="widget_color_on_surface">#FFFFFFFF</color>
+    <color name="widget_color_on_surface_variant">#B3FFFFFF</color>
+    <color name="widget_progress_fill">#FFCFBCFF</color>
+    <color name="widget_text_primary">#FFFFFFFF</color>
+    <color name="widget_text_secondary">#B3FFFFFF</color>
+    <style name="Theme.MiniMaxToken" parent="Theme.Material3.Dark.NoActionBar"/>
+</resources>

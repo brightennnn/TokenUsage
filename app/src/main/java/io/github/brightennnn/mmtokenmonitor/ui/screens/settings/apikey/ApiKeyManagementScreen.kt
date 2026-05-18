@@ -63,8 +63,7 @@ fun ApiKeyManagementScreen(
                     }) {
                         Icon(Icons.Default.Add, contentDescription = "添加")
                     }
-                },
-                windowInsets = WindowInsets(0.dp)
+                }
             )
         }
     ) { innerPadding ->
@@ -72,7 +71,7 @@ fun ApiKeyManagementScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 64.dp)
+                    .padding(top = innerPadding.calculateTopPadding())
                     .padding(bottom = innerPadding.calculateBottomPadding()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -100,7 +99,7 @@ fun ApiKeyManagementScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 64.dp),
+                    .padding(top = innerPadding.calculateTopPadding()),
                 contentPadding = PaddingValues(
                     vertical = VerveDoDefaults.screenVerticalPadding,
                     horizontal = 0.dp

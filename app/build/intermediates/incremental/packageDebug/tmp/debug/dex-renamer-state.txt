@@ -1,7 +1,7 @@
-#Mon May 04 01:41:27 CST 2026
-base.1=/root/.assist/workspace/projects/minimax-token/app/build/intermediates/dex/debug/minifyDebugWithR8/classes2.dex
-path.1=classes2.dex
+#Mon May 18 02:28:02 CST 2026
 base.0=/root/.assist/workspace/projects/minimax-token/app/build/intermediates/dex/debug/minifyDebugWithR8/classes.dex
-renamed.1=classes2.dex
-renamed.0=classes.dex
+base.1=/root/.assist/workspace/projects/minimax-token/app/build/intermediates/dex/debug/minifyDebugWithR8/classes2.dex
 path.0=classes.dex
+path.1=classes2.dex
+renamed.0=classes.dex
+renamed.1=classes2.dex

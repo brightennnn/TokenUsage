@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/interval_widget"
+    android:minWidth="180dp"
+    android:minHeight="56dp"
+    android:minResizeWidth="120dp"
+    android:minResizeHeight="48dp"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="3"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen"
+    android:description="@string/widget_interval_description"
+    android:previewLayout="@layout/interval_widget" />

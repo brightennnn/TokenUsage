@@ -3672,8 +3672,6 @@ androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$10
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$11
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$12
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$13
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$2
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$3
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$4
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$5
@@ -3681,10 +3679,6 @@ androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$6
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$7
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$8
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibility$9
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibilityImpl$1$1$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibilityImpl$1$1
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibilityImpl$2
-androidx.compose.animation.AnimatedVisibilityKt$AnimatedVisibilityImpl$3
 androidx.compose.animation.AnimatedVisibilityKt:
     public static final void AnimatedVisibility(androidx.compose.animation.core.MutableTransitionState,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
     public static final void AnimatedVisibility(androidx.compose.animation.core.Transition,kotlin.jvm.functions.Function1,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
@@ -3692,8 +3686,6 @@ androidx.compose.animation.AnimatedVisibilityKt:
     public static final void AnimatedVisibility(androidx.compose.foundation.layout.ColumnScope,boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
     public static final void AnimatedVisibility(androidx.compose.foundation.layout.RowScope,androidx.compose.animation.core.MutableTransitionState,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
     public static final void AnimatedVisibility(androidx.compose.foundation.layout.RowScope,boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
-    public static final void AnimatedVisibility(boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,java.lang.String,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int,int)
-    public static final void AnimatedVisibilityImpl(androidx.compose.animation.core.Transition,kotlin.jvm.functions.Function1,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.jvm.functions.Function3,androidx.compose.runtime.Composer,int)
 androidx.compose.animation.AnimatedVisibilityScope$DefaultImpls
 androidx.compose.animation.AnimatedVisibilityScope$animateEnterExit$$inlined$debugInspectorInfo$1
 androidx.compose.animation.AnimatedVisibilityScope$animateEnterExit$2
@@ -3718,12 +3710,6 @@ androidx.compose.animation.BoundsTransform
 androidx.compose.animation.ChangeSize$1
 androidx.compose.animation.ChangeSize:
     public static final int $stable
-    private final androidx.compose.ui.Alignment alignment
-    private final androidx.compose.animation.core.FiniteAnimationSpec animationSpec
-    private final boolean clip
-    private final kotlin.jvm.functions.Function1 size
-    static void <clinit>()
-    public void <init>(androidx.compose.ui.Alignment,kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec,boolean)
     public synthetic void <init>(androidx.compose.ui.Alignment,kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec,boolean,int,kotlin.jvm.internal.DefaultConstructorMarker)
     public final androidx.compose.ui.Alignment component1()
     public final kotlin.jvm.functions.Function1 component2()
@@ -3731,7 +3717,6 @@ androidx.compose.animation.ChangeSize:
     public final boolean component4()
     public final androidx.compose.animation.ChangeSize copy(androidx.compose.ui.Alignment,kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec,boolean)
     public static synthetic androidx.compose.animation.ChangeSize copy$default(androidx.compose.animation.ChangeSize,androidx.compose.ui.Alignment,kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec,boolean,int,java.lang.Object)
-    public boolean equals(java.lang.Object)
 androidx.compose.animation.ContentScaleTransitionEffect$Key
 androidx.compose.animation.ContentScaleTransitionEffect
 androidx.compose.animation.ContentTransform:
@@ -3769,48 +3754,36 @@ androidx.compose.animation.EnterExitTransitionElement:
     public final void setSlideAnimation(androidx.compose.animation.core.Transition$DeferredAnimation)
 androidx.compose.animation.EnterExitTransitionKt$expandHorizontally$1
 androidx.compose.animation.EnterExitTransitionKt$expandHorizontally$2
-androidx.compose.animation.EnterExitTransitionKt$expandIn$1
 androidx.compose.animation.EnterExitTransitionKt$expandVertically$1
 androidx.compose.animation.EnterExitTransitionKt$expandVertically$2
 androidx.compose.animation.EnterExitTransitionKt$shrinkHorizontally$1
 androidx.compose.animation.EnterExitTransitionKt$shrinkHorizontally$2
-androidx.compose.animation.EnterExitTransitionKt$shrinkOut$1
 androidx.compose.animation.EnterExitTransitionKt$shrinkVertically$1
 androidx.compose.animation.EnterExitTransitionKt$shrinkVertically$2
 androidx.compose.animation.EnterExitTransitionKt$slideInHorizontally$1
 androidx.compose.animation.EnterExitTransitionKt$slideInHorizontally$2
 androidx.compose.animation.EnterExitTransitionKt$slideInVertically$1
-androidx.compose.animation.EnterExitTransitionKt$slideInVertically$2
 androidx.compose.animation.EnterExitTransitionKt$slideOutHorizontally$1
 androidx.compose.animation.EnterExitTransitionKt$slideOutHorizontally$2
 androidx.compose.animation.EnterExitTransitionKt$slideOutVertically$1
-androidx.compose.animation.EnterExitTransitionKt$slideOutVertically$2
 androidx.compose.animation.EnterExitTransitionKt:
     public static final androidx.compose.animation.EnterTransition expandHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Horizontal,boolean,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.EnterTransition expandHorizontally$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Horizontal,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
-    public static final androidx.compose.animation.EnterTransition expandIn(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,boolean,kotlin.jvm.functions.Function1)
-    public static synthetic androidx.compose.animation.EnterTransition expandIn$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.EnterTransition expandVertically(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Vertical,boolean,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.EnterTransition expandVertically$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Vertical,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.TransitionEffect get(androidx.compose.animation.EnterTransition,androidx.compose.animation.TransitionEffectKey)
     public static final androidx.compose.animation.TransitionEffect get(androidx.compose.animation.ExitTransition,androidx.compose.animation.TransitionEffectKey)
     public static final androidx.compose.animation.ExitTransition shrinkHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Horizontal,boolean,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.ExitTransition shrinkHorizontally$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Horizontal,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
-    public static final androidx.compose.animation.ExitTransition shrinkOut(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,boolean,kotlin.jvm.functions.Function1)
-    public static synthetic androidx.compose.animation.ExitTransition shrinkOut$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.ExitTransition shrinkVertically(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Vertical,boolean,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.ExitTransition shrinkVertically$default(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment$Vertical,boolean,kotlin.jvm.functions.Function1,int,java.lang.Object)
-    public static final androidx.compose.animation.EnterTransition slideIn(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.EnterTransition slideIn$default(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.EnterTransition slideInHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.EnterTransition slideInHorizontally$default(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1,int,java.lang.Object)
-    public static final androidx.compose.animation.EnterTransition slideInVertically(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.EnterTransition slideInVertically$default(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1,int,java.lang.Object)
-    public static final androidx.compose.animation.ExitTransition slideOut(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.ExitTransition slideOut$default(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final androidx.compose.animation.ExitTransition slideOutHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.ExitTransition slideOutHorizontally$default(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1,int,java.lang.Object)
-    public static final androidx.compose.animation.ExitTransition slideOutVertically(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1)
     public static synthetic androidx.compose.animation.ExitTransition slideOutVertically$default(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.jvm.functions.Function1,int,java.lang.Object)
     private static final androidx.compose.ui.Alignment toAlignment(androidx.compose.ui.Alignment$Horizontal)
     private static final androidx.compose.ui.Alignment toAlignment(androidx.compose.ui.Alignment$Vertical)
@@ -3949,15 +3922,10 @@ androidx.compose.animation.SkipToLookaheadNode$measure$1
 androidx.compose.animation.SkipToLookaheadNode
 androidx.compose.animation.Slide:
     public static final int $stable
-    private final androidx.compose.animation.core.FiniteAnimationSpec animationSpec
-    private final kotlin.jvm.functions.Function1 slideOffset
-    static void <clinit>()
-    public void <init>(kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec)
     public final kotlin.jvm.functions.Function1 component1()
     public final androidx.compose.animation.core.FiniteAnimationSpec component2()
     public final androidx.compose.animation.Slide copy(kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec)
     public static synthetic androidx.compose.animation.Slide copy$default(androidx.compose.animation.Slide,kotlin.jvm.functions.Function1,androidx.compose.animation.core.FiniteAnimationSpec,int,java.lang.Object)
-    public boolean equals(java.lang.Object)
 androidx.compose.animation.SplineBasedDecayKt:
     private static final float EndTension
     private static final float Inflection
@@ -5213,7 +5181,6 @@ androidx.compose.foundation.layout.Arrangement:
     public final androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical getSpaceAround()
     public static synthetic void getSpaceAround$annotations()
     public static synthetic void getSpaceBetween$annotations()
-    public final androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical getSpaceEvenly()
     public static synthetic void getSpaceEvenly$annotations()
     public static synthetic void getStart$annotations()
     public static synthetic void getTop$annotations()
@@ -5589,8 +5556,6 @@ androidx.compose.foundation.layout.SizeKt$requiredWidth-3ABfNKs$$inlined$debugIn
 androidx.compose.foundation.layout.SizeKt$requiredWidthIn-VpY3zN4$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.layout.SizeKt$widthIn-VpY3zN4$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.layout.SizeKt:
-    public static final androidx.compose.ui.Modifier fillMaxHeight(androidx.compose.ui.Modifier,float)
-    public static synthetic androidx.compose.ui.Modifier fillMaxHeight$default(androidx.compose.ui.Modifier,float,int,java.lang.Object)
     public static final androidx.compose.ui.Modifier requiredHeight-3ABfNKs(androidx.compose.ui.Modifier,float)
     public static final androidx.compose.ui.Modifier requiredHeightIn-VpY3zN4(androidx.compose.ui.Modifier,float,float)
     public static synthetic androidx.compose.ui.Modifier requiredHeightIn-VpY3zN4$default(androidx.compose.ui.Modifier,float,float,int,java.lang.Object)
@@ -5648,7 +5613,6 @@ androidx.compose.foundation.layout.WindowInsetsHolder:
     public final androidx.compose.foundation.layout.WindowInsets getSafeContent()
     public final androidx.compose.foundation.layout.WindowInsets getSafeDrawing()
     public final androidx.compose.foundation.layout.WindowInsets getSafeGestures()
-    public final androidx.compose.foundation.layout.AndroidWindowInsets getStatusBars()
     public final androidx.compose.foundation.layout.ValueInsets getStatusBarsIgnoringVisibility()
     public final androidx.compose.foundation.layout.ValueInsets getSystemBarsIgnoringVisibility()
     public final androidx.compose.foundation.layout.AndroidWindowInsets getSystemGestures()
@@ -5659,7 +5623,6 @@ androidx.compose.foundation.layout.WindowInsetsKt:
     public static synthetic androidx.compose.foundation.layout.WindowInsets WindowInsets$default(int,int,int,int,int,java.lang.Object)
     public static final androidx.compose.foundation.layout.WindowInsets add(androidx.compose.foundation.layout.WindowInsets,androidx.compose.foundation.layout.WindowInsets)
     public static final androidx.compose.foundation.layout.WindowInsets asInsets(androidx.compose.foundation.layout.PaddingValues)
-    public static final androidx.compose.foundation.layout.PaddingValues asPaddingValues(androidx.compose.foundation.layout.WindowInsets,androidx.compose.runtime.Composer,int)
 androidx.compose.foundation.layout.WindowInsetsNestedScrollConnection$animationEnded$1
 androidx.compose.foundation.layout.WindowInsetsNestedScrollConnection$dispose$1
 androidx.compose.foundation.layout.WindowInsetsNestedScrollConnection$fling$1
@@ -5759,7 +5722,6 @@ androidx.compose.foundation.layout.WindowInsets_androidKt:
     public static final androidx.compose.foundation.layout.WindowInsets getSafeContent(androidx.compose.foundation.layout.WindowInsets$Companion,androidx.compose.runtime.Composer,int)
     public static final androidx.compose.foundation.layout.WindowInsets getSafeDrawing(androidx.compose.foundation.layout.WindowInsets$Companion,androidx.compose.runtime.Composer,int)
     public static final androidx.compose.foundation.layout.WindowInsets getSafeGestures(androidx.compose.foundation.layout.WindowInsets$Companion,androidx.compose.runtime.Composer,int)
-    public static final androidx.compose.foundation.layout.WindowInsets getStatusBars(androidx.compose.foundation.layout.WindowInsets$Companion,androidx.compose.runtime.Composer,int)
     public static final androidx.compose.foundation.layout.WindowInsets getStatusBarsIgnoringVisibility(androidx.compose.foundation.layout.WindowInsets$Companion,androidx.compose.runtime.Composer,int)
     public static synthetic void getStatusBarsIgnoringVisibility$annotations(androidx.compose.foundation.layout.WindowInsets$Companion)
     public static final androidx.compose.foundation.layout.WindowInsets getSystemBarsIgnoringVisibility(androidx.compose.foundation.layout.WindowInsets$Companion,androidx.compose.runtime.Composer,int)
@@ -6393,6 +6355,8 @@ androidx.compose.foundation.relocation.BringIntoViewResponderNode:
     public final void setResponder(androidx.compose.foundation.relocation.BringIntoViewResponder)
 androidx.compose.foundation.selection.SelectableElement:
     public void inspectableProperties(androidx.compose.ui.platform.InspectorInfo)
+androidx.compose.foundation.selection.SelectableGroupKt$selectableGroup$1
+androidx.compose.foundation.selection.SelectableGroupKt
 androidx.compose.foundation.selection.SelectableKt$selectable$2
 androidx.compose.foundation.selection.SelectableKt$selectable-XHw0xAI$$inlined$debugInspectorInfo$1
 androidx.compose.foundation.selection.SelectableKt:
@@ -20204,6 +20168,7 @@ androidx.compose.material3.ColorScheme:
     private androidx.compose.material3.TopAppBarColors defaultLargeTopAppBarColorsCached
     private androidx.compose.material3.TopAppBarColors defaultMediumTopAppBarColorsCached
     private androidx.compose.material3.MenuItemColors defaultMenuItemColorsCached
+    private androidx.compose.material3.NavigationBarItemColors defaultNavigationBarItemColorsCached
     private androidx.compose.material3.NavigationRailItemColors defaultNavigationRailItemColorsCached
     private androidx.compose.material3.ButtonColors defaultOutlinedButtonColorsCached
     private androidx.compose.material3.CardColors defaultOutlinedCardColorsCached
@@ -20243,6 +20208,7 @@ androidx.compose.material3.ColorScheme:
     public final androidx.compose.material3.TopAppBarColors getDefaultMediumTopAppBarColorsCached$material3_release()
     public static synthetic void getDefaultMediumTopAppBarColorsCached$material3_release$annotations()
     public final androidx.compose.material3.MenuItemColors getDefaultMenuItemColorsCached$material3_release()
+    public final androidx.compose.material3.NavigationBarItemColors getDefaultNavigationBarItemColorsCached$material3_release()
     public final androidx.compose.material3.NavigationRailItemColors getDefaultNavigationRailItemColorsCached$material3_release()
     public final androidx.compose.material3.ButtonColors getDefaultOutlinedButtonColorsCached$material3_release()
     public final androidx.compose.material3.CardColors getDefaultOutlinedCardColorsCached$material3_release()
@@ -20278,6 +20244,7 @@ androidx.compose.material3.ColorScheme:
     public final void setDefaultLargeTopAppBarColorsCached$material3_release(androidx.compose.material3.TopAppBarColors)
     public final void setDefaultMediumTopAppBarColorsCached$material3_release(androidx.compose.material3.TopAppBarColors)
     public final void setDefaultMenuItemColorsCached$material3_release(androidx.compose.material3.MenuItemColors)
+    public final void setDefaultNavigationBarItemColorsCached$material3_release(androidx.compose.material3.NavigationBarItemColors)
     public final void setDefaultNavigationRailItemColorsCached$material3_release(androidx.compose.material3.NavigationRailItemColors)
     public final void setDefaultOutlinedButtonColorsCached$material3_release(androidx.compose.material3.ButtonColors)
     public final void setDefaultOutlinedCardColorsCached$material3_release(androidx.compose.material3.CardColors)
@@ -20854,30 +20821,26 @@ androidx.compose.material3.MultiChoiceSegmentedButtonRowScope
 androidx.compose.material3.MultiChoiceSegmentedButtonScopeWrapper
 androidx.compose.material3.NavigationBarArrangement$Companion
 androidx.compose.material3.NavigationBarArrangement
-androidx.compose.material3.NavigationBarDefaults:
-    public static final int $stable
-androidx.compose.material3.NavigationBarItemColors:
-    public static final int $stable
-    public final androidx.compose.material3.NavigationBarItemColors copy-4JmcsL4(long,long,long,long,long,long,long)
-    public static synthetic androidx.compose.material3.NavigationBarItemColors copy-4JmcsL4$default(androidx.compose.material3.NavigationBarItemColors,long,long,long,long,long,long,long,int,java.lang.Object)
-    public final long getDisabledIconColor-0d7_KjU()
-    public final long getDisabledTextColor-0d7_KjU()
-    public final long getSelectedIconColor-0d7_KjU()
-    public final long getSelectedIndicatorColor-0d7_KjU()
-    public final long getSelectedTextColor-0d7_KjU()
-    public final long getUnselectedIconColor-0d7_KjU()
-    public final long getUnselectedTextColor-0d7_KjU()
-androidx.compose.material3.NavigationBarItemDefaults:
-    public static final int $stable
-    public final androidx.compose.material3.NavigationBarItemColors colors-69fazGs(long,long,long,long,long,long,long,androidx.compose.runtime.Composer,int,int)
-    public final synthetic androidx.compose.material3.NavigationBarItemColors colors-zjMxDiM(long,long,long,long,long,androidx.compose.runtime.Composer,int,int)
-androidx.compose.material3.NavigationBarKt:
-    private static final java.lang.String IconLayoutIdTag
-    private static final java.lang.String IndicatorLayoutIdTag
-    private static final java.lang.String IndicatorRippleLayoutIdTag
-    private static final int ItemAnimationDurationMillis
-    private static final java.lang.String LabelLayoutIdTag
-    public static final float getNavigationBarIndicatorToLabelPadding()
+androidx.compose.material3.NavigationBarDefaults
+androidx.compose.material3.NavigationBarItemColors
+androidx.compose.material3.NavigationBarItemDefaults
+androidx.compose.material3.NavigationBarKt$NavigationBar$1
+androidx.compose.material3.NavigationBarKt$NavigationBar$2
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$1$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$2$2$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$2$indicator$1$1$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$2$indicator$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$2$indicatorRipple$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$3
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$styledIcon$1$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$styledIcon$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItem$styledLabel$1$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItemLayout$1$2$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItemLayout$2$1
+androidx.compose.material3.NavigationBarKt$NavigationBarItemLayout$3
+androidx.compose.material3.NavigationBarKt$placeIcon$1
+androidx.compose.material3.NavigationBarKt$placeLabelAndIcon$1
+androidx.compose.material3.NavigationBarKt
 androidx.compose.material3.NavigationDrawerItemColors
 androidx.compose.material3.NavigationDrawerItemDefaults
 androidx.compose.material3.NavigationDrawerKt$DismissibleDrawerSheet$1
@@ -21977,10 +21940,10 @@ androidx.compose.material3.internal.Listener$switchAccessListener$1
 androidx.compose.material3.internal.Listener$touchExplorationListener$1
 androidx.compose.material3.internal.Listener
 androidx.compose.material3.internal.MapDraggableAnchors
-androidx.compose.material3.internal.MappedInteractionSource$special$$inlined$map$1$2$1:
-    java.lang.Object L$0
-androidx.compose.material3.internal.MappedInteractionSource:
-    public static final int $stable
+androidx.compose.material3.internal.MappedInteractionSource$special$$inlined$map$1$2$1
+androidx.compose.material3.internal.MappedInteractionSource$special$$inlined$map$1$2
+androidx.compose.material3.internal.MappedInteractionSource$special$$inlined$map$1
+androidx.compose.material3.internal.MappedInteractionSource
 androidx.compose.material3.internal.MenuPosition$Horizontal
 androidx.compose.material3.internal.MenuPosition$Vertical
 androidx.compose.material3.internal.MenuPosition
@@ -22217,23 +22180,7 @@ androidx.compose.material3.tokens.InputChipTokens
 androidx.compose.material3.tokens.ListTokens
 androidx.compose.material3.tokens.MenuTokens
 androidx.compose.material3.tokens.MotionTokens
-androidx.compose.material3.tokens.NavigationBarTokens:
-    public static final int $stable
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getActiveFocusIconColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getActiveFocusLabelTextColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getActiveHoverIconColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getActiveHoverLabelTextColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getActivePressedIconColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getActivePressedLabelTextColor()
-    public final float getContainerElevation-D9Ej5fM()
-    public final androidx.compose.material3.tokens.ShapeKeyTokens getContainerShape()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getFocusIndicatorColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getInactiveFocusIconColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getInactiveFocusLabelTextColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getInactiveHoverIconColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getInactiveHoverLabelTextColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getInactivePressedIconColor()
-    public final androidx.compose.material3.tokens.ColorSchemeKeyTokens getInactivePressedLabelTextColor()
+androidx.compose.material3.tokens.NavigationBarTokens
 androidx.compose.material3.tokens.NavigationDrawerTokens
 androidx.compose.material3.tokens.NavigationRailTokens
 androidx.compose.material3.tokens.OutlinedAutocompleteTokens
@@ -28592,6 +28539,7 @@ androidx.compose.ui.semantics.SemanticsPropertiesKt:
     public static synthetic void onAutofillText$default(androidx.compose.ui.semantics.SemanticsPropertyReceiver,java.lang.String,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static final void performImeAction(androidx.compose.ui.semantics.SemanticsPropertyReceiver,java.lang.String,kotlin.jvm.functions.Function0)
     public static synthetic void performImeAction$default(androidx.compose.ui.semantics.SemanticsPropertyReceiver,java.lang.String,kotlin.jvm.functions.Function0,int,java.lang.Object)
+    public static final void selectableGroup(androidx.compose.ui.semantics.SemanticsPropertyReceiver)
     public static final void setCollectionItemInfo(androidx.compose.ui.semantics.SemanticsPropertyReceiver,androidx.compose.ui.semantics.CollectionItemInfo)
     public static final void setContentDataType-NTL_tik(androidx.compose.ui.semantics.SemanticsPropertyReceiver,int)
     public static final void setContentType(androidx.compose.ui.semantics.SemanticsPropertyReceiver,androidx.compose.ui.autofill.ContentType)
@@ -49705,37 +49653,12 @@ io.github.brightennnn.mmtokenmonitor.R$drawable:
     public static int ic_launcher_foreground
     public static int ic_launcher_foreground_text
     public static int ic_launcher_monochrome
-    public static int liquid_fill_frame
-    public static int weekly_wave_progress
     public static int widget_background
     public static int widget_progress_bar
     public static int widget_progress_bar_error
     private void <init>()
-io.github.brightennnn.mmtokenmonitor.R$id:
-    public static int widget_progress
-    public static int widget_progress_interval
-    public static int widget_progress_weekly
-    public static int widget_refresh
-    public static int widget_root
-    public static int widget_title
-    public static int widget_title_interval
-    public static int widget_title_weekly
-    public static int widget_total
-    public static int widget_total_interval
-    public static int widget_total_weekly
-    public static int widget_update_time
-    public static int widget_used
-    public static int widget_used_interval
-    public static int widget_used_weekly
-    private void <init>()
-io.github.brightennnn.mmtokenmonitor.R$layout:
-    public static int combined_widget
-    public static int glance_interval_widget
-    public static int glance_weekly_widget
-    public static int interval_widget
-    public static int weekly_widget
-    public static int widget_loading
-    private void <init>()
+io.github.brightennnn.mmtokenmonitor.R$id
+io.github.brightennnn.mmtokenmonitor.R$layout
 io.github.brightennnn.mmtokenmonitor.R$mipmap
 io.github.brightennnn.mmtokenmonitor.R$string
 io.github.brightennnn.mmtokenmonitor.R$style
@@ -49764,26 +49687,27 @@ io.github.brightennnn.mmtokenmonitor.di.NetworkModule_ProvideRetrofitFactory:
 io.github.brightennnn.mmtokenmonitor.di.RepositoryModule
 io.github.brightennnn.mmtokenmonitor.domain.repository.TokenRepository:
     public abstract java.lang.Object clearAllApiKeys(kotlin.coroutines.Continuation)
-io.github.brightennnn.mmtokenmonitor.ui.components.HapticFeedback:
-    public final boolean isEnabled()
-io.github.brightennnn.mmtokenmonitor.ui.navigation.AppNavHostKt:
-    private static final int ANIM_DURATION
-io.github.brightennnn.mmtokenmonitor.ui.navigation.BottomNavDestination:
+io.github.brightennnn.mmtokenmonitor.ui.components.BottomNavItem:
+    public static final int $stable
     public final java.lang.String component1()
     public final androidx.compose.ui.graphics.vector.ImageVector component2()
-    public final io.github.brightennnn.mmtokenmonitor.ui.navigation.BottomNavDestination copy(java.lang.String,androidx.compose.ui.graphics.vector.ImageVector)
-    public static synthetic io.github.brightennnn.mmtokenmonitor.ui.navigation.BottomNavDestination copy$default(io.github.brightennnn.mmtokenmonitor.ui.navigation.BottomNavDestination,java.lang.String,androidx.compose.ui.graphics.vector.ImageVector,int,java.lang.Object)
+    public final io.github.brightennnn.mmtokenmonitor.ui.components.BottomNavItem copy(java.lang.String,androidx.compose.ui.graphics.vector.ImageVector)
+    public static synthetic io.github.brightennnn.mmtokenmonitor.ui.components.BottomNavItem copy$default(io.github.brightennnn.mmtokenmonitor.ui.components.BottomNavItem,java.lang.String,androidx.compose.ui.graphics.vector.ImageVector,int,java.lang.Object)
+io.github.brightennnn.mmtokenmonitor.ui.components.HapticFeedback:
+    public final boolean isEnabled()
 io.github.brightennnn.mmtokenmonitor.ui.navigation.Screen$AppFontSettings
 io.github.brightennnn.mmtokenmonitor.ui.navigation.Screen$Settings
 io.github.brightennnn.mmtokenmonitor.ui.navigation.Screen$Usage
 io.github.brightennnn.mmtokenmonitor.ui.navigation.Screen
-io.github.brightennnn.mmtokenmonitor.ui.screens.home.HomeScreenKt$HomeScreen$1$2$2$2$invoke$$inlined$items$default$2
+io.github.brightennnn.mmtokenmonitor.ui.screens.home.HomeScreenKt$HomeScreen$1$2$2$3$invoke$$inlined$items$default$2
 io.github.brightennnn.mmtokenmonitor.ui.screens.home.HomeUiState:
     public void <init>()
     public final java.util.List component1()
     public final boolean component2()
     public final java.lang.String component3()
     public final boolean component4()
+    public final boolean component5()
+    public final boolean isRefreshing()
 io.github.brightennnn.mmtokenmonitor.ui.screens.home.HomeViewModel_Factory
 io.github.brightennnn.mmtokenmonitor.ui.screens.home.HomeViewModel_HiltModules$BindsModule
 io.github.brightennnn.mmtokenmonitor.ui.screens.home.HomeViewModel_HiltModules$KeyModule:
@@ -49834,32 +49758,6 @@ io.github.brightennnn.mmtokenmonitor.ui.screens.settings.SettingsViewModel_HiltM
     public java.lang.String get()
 io.github.brightennnn.mmtokenmonitor.ui.theme.VerveDoDefaults:
     public static final int $stable
-io.github.brightennnn.mmtokenmonitor.widget.AnimWeeklyWidget$Companion$isDarkTheme$monetMode$1
-io.github.brightennnn.mmtokenmonitor.widget.AnimWeeklyWidget$Companion:
-    private final boolean isDarkTheme(android.content.Context)
-io.github.brightennnn.mmtokenmonitor.widget.AnimWeeklyWidget:
-    public static final int $stable
-    public static final java.lang.String ACTION_REFRESH_B
-    public static final java.lang.String WIDGET_DATA_FILE
-    public void <init>()
-    public void onDisabled(android.content.Context)
-    public void onEnabled(android.content.Context)
-    public void onReceive(android.content.Context,android.content.Intent)
-    public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
-io.github.brightennnn.mmtokenmonitor.widget.AnimWeeklyWidgetReceiver
-io.github.brightennnn.mmtokenmonitor.widget.CanvasIntervalWidget$Companion$isDarkTheme$monetMode$1
-io.github.brightennnn.mmtokenmonitor.widget.CanvasIntervalWidget$Companion:
-    private final boolean isDarkTheme(android.content.Context)
-io.github.brightennnn.mmtokenmonitor.widget.CanvasIntervalWidget:
-    public static final int $stable
-    public static final java.lang.String ACTION_REFRESH
-    public static final java.lang.String WIDGET_DATA_FILE
-    public void <init>()
-    public void onDisabled(android.content.Context)
-    public void onEnabled(android.content.Context)
-    public void onReceive(android.content.Context,android.content.Intent)
-    public void onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])
-io.github.brightennnn.mmtokenmonitor.widget.CanvasIntervalWidgetReceiver
 io.github.brightennnn.mmtokenmonitor.widget.GlanceIntervalWidget:
     public static final int $stable
     public static final java.lang.String WIDGET_DATA_FILE
@@ -49888,6 +49786,8 @@ io.github.brightennnn.mmtokenmonitor.widget.MonetColorExtractor$ThemeSettings:
 io.github.brightennnn.mmtokenmonitor.widget.MonetColorExtractor:
     public static final int $stable
     private static final java.lang.String WIDGET_DATA_FILE
+    public final int getAccentColor(android.content.Context)
+    public final int getBackgroundColor(android.content.Context)
     public final int getSecondaryTextColor(android.content.Context)
     public final int getTextColor(android.content.Context)
 io.github.brightennnn.mmtokenmonitor.widget.TokenWidgetUpdater:
@@ -58441,21 +58341,6 @@ androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$2$1:
     public final synthetic androidx.compose.animation.OnLookaheadMeasured $onLookaheadMeasured
 androidx.compose.animation.AnimatedVisibilityKt$AnimatedEnterExitImpl$4:
     public final synthetic androidx.compose.animation.OnLookaheadMeasured $onLookaheadMeasured
-androidx.compose.animation.ChangeSize:
-    public abstract androidx.compose.ui.Alignment getAlignment()
-    public abstract androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
-    public abstract boolean getClip()
-    public abstract kotlin.jvm.functions.Function1 getSize()
-    public abstract int hashCode()
-    public abstract java.lang.String toString()
-androidx.compose.animation.Slide:
-    public abstract androidx.compose.animation.core.FiniteAnimationSpec getAnimationSpec()
-    public abstract kotlin.jvm.functions.Function1 getSlideOffset()
-    public abstract int hashCode()
-    public abstract java.lang.String toString()
-androidx.compose.animation.TransitionData:
-    public final androidx.compose.animation.ChangeSize changeSize
-    public final androidx.compose.animation.Slide slide
 androidx.compose.foundation.AndroidEdgeEffectOverscrollEffect$special$$inlined$debugInspectorInfo$2$$InternalSyntheticThrowCCEIfNotNull$13$d73e0a62c820d108095f21b07b8e8e5dc8bc83d2ca654c8cecc00cc14634a62d$0
 androidx.compose.foundation.AndroidEdgeEffectOverscrollEffect$special$$inlined$debugInspectorInfo$2
 androidx.compose.foundation.DrawGlowOverscrollModifier

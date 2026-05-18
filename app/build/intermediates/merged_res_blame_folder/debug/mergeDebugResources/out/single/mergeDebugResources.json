@@ -1,75 +1,55 @@
 [
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_glance_interval_widget_info.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/glance_interval_widget_info.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_widget_background.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/widget_background.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_canvas_interval_widget_info.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/canvas_interval_widget_info.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_canvas_progress.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/canvas_progress.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_liquid_fill_frame.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/liquid_fill_frame.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_combined_widget.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/combined_widget.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_anim_weekly_widget.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/anim_weekly_widget.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_glance_weekly_widget_info.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/glance_weekly_widget_info.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_widget_progress_bar.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/widget_progress_bar.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_glance_interval_widget_info.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/glance_interval_widget_info.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_interval_widget.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/interval_widget.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_canvas_interval_widget.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/canvas_interval_widget.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_minimax.png.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_minimax.png"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/color_widget_progress_fill.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/color/widget_progress_fill.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_widget_loading.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/widget_loading.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable-nodpi_ic_launcher_foreground_text.png.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable-nodpi/ic_launcher_foreground_text.png"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/color_widget_progress_fill.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/color/widget_progress_fill.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_widget_info.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/widget_info.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_widget_progress_bar_error.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/widget_progress_bar_error.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_widget_progress_bar_error.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/widget_progress_bar_error.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_launcher_monochrome.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_launcher_monochrome.xml"
-    },
-    {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_vervedo.png.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_vervedo.png"
-    },
-    {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_launcher_foreground.xml"
-    },
-    {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_github.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_github.xml"
-    },
-    {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_launcher_background.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_launcher_background.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
         "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_launcher_foreground.xml.flat",
         "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_launcher_foreground.xml"
-    },
-    {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_glance_weekly_widget.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/glance_weekly_widget.xml"
     },
     {
         "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_launcher_monochrome.xml.flat",
@@ -80,68 +60,56 @@
         "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/color_widget_track_tint.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/color/widget_track_tint.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_anim_weekly_widget.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/anim_weekly_widget.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable-nodpi_ic_launcher_foreground_text.png.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable-nodpi/ic_launcher_foreground_text.png"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_hermes.png.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_hermes.png"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_weekly_widget.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/weekly_widget.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_glance_interval_widget.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/glance_interval_widget.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_launcher_adaptive.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_launcher_adaptive.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_glance_weekly_widget.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/glance_weekly_widget.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_canvas_progress.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/canvas_progress.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_github.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_github.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_glance_interval_widget.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/glance_interval_widget.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_widget_waves_paths.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/widget_waves_paths.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_widget_progress_bar.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/widget_progress_bar.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_minimax.png.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_minimax.png"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_widget_info.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/widget_info.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_weekly_widget.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/weekly_widget.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_widget_waves_paths.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/widget_waves_paths.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_vervedo.png.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_vervedo.png"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_anim_weekly_widget_info.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/anim_weekly_widget_info.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_widget_loading.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/widget_loading.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_hermes.png.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/ic_hermes.png"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/color_widget_track_tint.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/color/widget_track_tint.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_combined_widget.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/combined_widget.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_interval_widget.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/interval_widget.xml"
     },
     {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_widget_background.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/widget_background.xml"
-    },
-    {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_weekly_wave_progress.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/drawable/weekly_wave_progress.xml"
-    },
-    {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/xml_glance_weekly_widget_info.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/xml/glance_weekly_widget_info.xml"
-    },
-    {
-        "merged": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-debug-4:/layout_canvas_interval_widget.xml.flat",
-        "source": "/root/.gradle/daemon/8.7/io.github.brightennnn.mmtokenmonitor.app-main-6:/layout/canvas_interval_widget.xml"
+        "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "io.github.brightennnn.mmtokenmonitor.app-main-6:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
         "merged": "io.github.brightennnn.mmtokenmonitor.app-debug-4:/drawable_ic_launcher_adaptive.xml.flat",

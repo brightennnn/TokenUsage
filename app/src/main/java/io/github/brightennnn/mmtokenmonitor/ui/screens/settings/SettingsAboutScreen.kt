@@ -46,15 +46,14 @@ fun SettingsAboutScreen(
                             contentDescription = "返回"
                         )
                     }
-                },
-                windowInsets = WindowInsets(0.dp)
+                }
             )
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 64.dp)
+                .padding(top = innerPadding.calculateTopPadding())
                 .verticalScroll(rememberScrollState())
         ) {
             AboutItem(
@@ -67,7 +66,7 @@ fun SettingsAboutScreen(
                     )
                 },
                 title = "版本号",
-                subtitle = "1.0.7",
+                subtitle = "1.1",
                 onClick = null
             )
 

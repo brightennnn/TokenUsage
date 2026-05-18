@@ -71,7 +71,7 @@ class GlanceWeeklyWidget : GlanceAppWidget() {
                             fontSize = 28.sp
                         )
                     )
-                    Spacer(GlanceModifier.height(4.dp))
+                    Spacer(GlanceModifier.height(5.dp))
                     Text(
                         text = data.weeklyPeriod,
                         style = TextStyle(

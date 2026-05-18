@@ -32,15 +32,14 @@ fun SettingsMainScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("设置") },
-                windowInsets = WindowInsets(0.dp)
+                title = { Text("设置") }
             )
         }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 64.dp),
+                .padding(top = innerPadding.calculateTopPadding()),
             contentPadding = PaddingValues(
                 bottom = innerPadding.calculateBottomPadding()
             )

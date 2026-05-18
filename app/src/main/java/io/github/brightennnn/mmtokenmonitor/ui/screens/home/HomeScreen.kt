@@ -2,7 +2,9 @@ package io.github.brightennnn.mmtokenmonitor.ui.screens.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
@@ -30,7 +32,8 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    themeRepository: ThemeRepository? = null
+    themeRepository: ThemeRepository? = null,
+    lazyListState: LazyListState = rememberLazyListState()
 ) {
     val view = LocalView.current
     val uiState by viewModel.uiState.collectAsState()
@@ -57,7 +60,6 @@ fun HomeScreen(
                             }
                         }
                     },
-                    windowInsets = WindowInsets(0.dp),
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.surface
                     )
@@ -70,8 +72,7 @@ fun HomeScreen(
                 state = pullToRefreshState,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 64.dp)
-                    .padding(bottom = innerPadding.calculateBottomPadding())
+                    .padding(top = innerPadding.calculateTopPadding())
             ) {
                 if (uiState.error != null) {
                     Card(
@@ -122,6 +123,7 @@ fun HomeScreen(
 
                 if (visibleQuotas.isNotEmpty()) {
                     LazyColumn(
+                        state = lazyListState,
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
