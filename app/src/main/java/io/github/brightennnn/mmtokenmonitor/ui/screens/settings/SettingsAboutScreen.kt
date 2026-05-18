@@ -66,7 +66,7 @@ fun SettingsAboutScreen(
                     )
                 },
                 title = "版本号",
-                subtitle = "1.1",
+                subtitle = "1.1.2",
                 onClick = null
             )
 
