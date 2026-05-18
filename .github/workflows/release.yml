@@ -25,12 +25,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Create keystore from secret
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ${{ github.workspace }}/release.jks
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > /tmp/release.jks && ls -la /tmp/release.jks
 
       - name: Build release APK
         run: ./gradlew assembleRelease
         env:
-          KEYSTORE_FILE: ${{ github.workspace }}/release.jks
+          KEYSTORE_FILE: /tmp/release.jks
 
       - name: Upload APK to Release
         uses: softprops/action-gh-release@v2
