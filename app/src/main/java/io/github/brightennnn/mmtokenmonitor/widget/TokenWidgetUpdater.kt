@@ -24,20 +24,21 @@ object TokenWidgetUpdater {
      */
     suspend fun updateWidget(context: Context, quotas: List<ModelQuota>, fontSizeRepository: FontSizeRepository) {
         android.util.Log.d("TokenWidget", "updateWidget called with ${quotas.size} quotas")
-        // 优先使用 MiniMax-M 系列模型（排除 coding-plan）
-        val minimaxModel = quotas.filter {
+        // 优先使用 general 模型（Token Plan 主模型）
+        val generalModel = quotas.filter {
             !it.modelName.contains("coding-plan", ignoreCase = true)
-                && it.modelName.contains("MiniMax-M", ignoreCase = true)
+                && it.modelName == "general"
         }.firstOrNull {
-            it.intervalUsed > 0 || it.intervalTotal > 0 || it.weeklyUsed > 0 || it.weeklyTotal > 0
+            it.intervalRemainingPercent > 0 || it.weeklyRemainingPercent > 0
         } ?: quotas.filter {
             !it.modelName.contains("coding-plan", ignoreCase = true)
-                && it.modelName.contains("MiniMax-M", ignoreCase = true)
-        }.firstOrNull() ?: run {
-            android.util.Log.d("TokenWidget", "No MiniMax-M model found")
+                && it.modelName == "general"
+        }.firstOrNull()
+        if (generalModel == null) {
+            android.util.Log.d("TokenWidget", "No general model found")
             return
         }
-        android.util.Log.d("TokenWidget", "Using model: ${minimaxModel.modelName}, interval: ${minimaxModel.intervalUsed}/${minimaxModel.intervalTotal}, weekly: ${minimaxModel.weeklyUsed}/${minimaxModel.weeklyTotal}")
+        android.util.Log.d("TokenWidget", "Using model: ${generalModel.modelName}, interval: ${generalModel.intervalRemainingPercent}%, weekly: ${generalModel.weeklyRemainingPercent}%")
 
         // 读取 Widget 字号
         val widgetFontSizes = fontSizeRepository.widgetFontSizes.first()
@@ -54,27 +55,27 @@ object TokenWidgetUpdater {
         val timeFormatter = java.time.format.DateTimeFormatter.ofPattern("HH:mm")
         val dateFormatter = java.time.format.DateTimeFormatter.ofPattern("MM-dd")
         val nowStr = java.time.Instant.now().atZone(beijingZone).format(timeFormatter)
-        val intervalPeriodStr = if (minimaxModel.intervalStartMs > 0 && minimaxModel.intervalEndMs > 0) {
-            val start = java.time.Instant.ofEpochMilli(minimaxModel.intervalStartMs).atZone(beijingZone).format(timeFormatter)
-            val end = java.time.Instant.ofEpochMilli(minimaxModel.intervalEndMs).atZone(beijingZone).format(timeFormatter)
+        val intervalPeriodStr = if (generalModel.intervalStartMs > 0 && generalModel.intervalEndMs > 0) {
+            val start = java.time.Instant.ofEpochMilli(generalModel.intervalStartMs).atZone(beijingZone).format(timeFormatter)
+            val end = java.time.Instant.ofEpochMilli(generalModel.intervalEndMs).atZone(beijingZone).format(timeFormatter)
             "$start-$end"
         } else "—"
-        val weeklyPeriodStr = if (minimaxModel.weeklyStartMs > 0 && minimaxModel.weeklyEndMs > 0) {
-            val start = java.time.Instant.ofEpochMilli(minimaxModel.weeklyStartMs).atZone(beijingZone).format(dateFormatter)
-            val end = java.time.Instant.ofEpochMilli(minimaxModel.weeklyEndMs).atZone(beijingZone).format(dateFormatter)
+        val weeklyPeriodStr = if (generalModel.weeklyStartMs > 0 && generalModel.weeklyEndMs > 0) {
+            val start = java.time.Instant.ofEpochMilli(generalModel.weeklyStartMs).atZone(beijingZone).format(dateFormatter)
+            val end = java.time.Instant.ofEpochMilli(generalModel.weeklyEndMs).atZone(beijingZone).format(dateFormatter)
             "$start ~ $end"
         } else "—"
 
         val json = JSONObject().apply {
-            put("modelName", minimaxModel.modelName)
-            put("intervalUsed", minimaxModel.intervalUsed)
-            put("intervalTotal", minimaxModel.intervalTotal)
-            put("intervalStartMs", minimaxModel.intervalStartMs)
-            put("intervalEndMs", minimaxModel.intervalEndMs)
-            put("weeklyUsed", minimaxModel.weeklyUsed)
-            put("weeklyTotal", minimaxModel.weeklyTotal)
-            put("weeklyStartMs", minimaxModel.weeklyStartMs)
-            put("weeklyEndMs", minimaxModel.weeklyEndMs)
+            put("modelName", generalModel.modelName)
+            put("intervalRemainingPercent", generalModel.intervalRemainingPercent)
+            put("intervalStartMs", generalModel.intervalStartMs)
+            put("intervalEndMs", generalModel.intervalEndMs)
+            put("intervalRemainsMs", generalModel.intervalRemainsMs)
+            put("weeklyRemainingPercent", generalModel.weeklyRemainingPercent)
+            put("weeklyStartMs", generalModel.weeklyStartMs)
+            put("weeklyEndMs", generalModel.weeklyEndMs)
+            put("weeklyRemainsMs", generalModel.weeklyRemainsMs)
             put("lastUpdate", nowStr)
             put("intervalPeriod", intervalPeriodStr)
             put("weeklyPeriod", weeklyPeriodStr)

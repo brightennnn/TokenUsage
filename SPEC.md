@@ -50,19 +50,20 @@
 - 输入框保存到 DataStore（加密存储）
 - App 启动时自动加载已保存的 Key
 - 有 Key 时自动查询，无 Key 时显示引导输入界面
+- 每个 Key 绑定一个 GroupId（MiniMax 控制台可查），用于新接口的 GroupId 查询参数
 
 ### 3.2 数据查询
 
-- 调用 `https://www.minimaxi.com/v1/token_plan/remains`
-- 返回所有模型的配额数据
-- 全部模型均显示（已用=0 也显示）
+- 调用 `https://www.minimaxi.com/v1/api/openplatform/coding_plan/remains?GroupId={groupId}`
+- Header：`Authorization: Bearer {apiKey}`、`accept: application/json`
+- 返回 `model_remains[]`，每个模型含 `current_interval_remaining_percent` / `current_weekly_remaining_percent`（以 100% 为分母的剩余比例）、`remains_time`（5h 窗口剩余 ms）、`weekly_remains_time`（周窗口剩余 ms）、`start_time`/`end_time`/`weekly_start_time`/`weekly_end_time`（窗口起止时间戳）
+- 注意：新接口的 `current_*_count` 字段恒为 0，UI 必须以百分比展示，不能再用「已用/总额」格式
 
 ### 3.3 Widget
 
 - 显示 MiniMax-M* 模型的用量
-- 5小时窗口：显示时间范围（24小时制，如 `15:00 - 20:00`）
-- 周窗口：显示日期范围（如 `2026-04-27 ~ 2026-05-04`）
-- 同时显示已用/总额度
+- 5小时窗口：显示时间范围（24小时制，如 `15:00 - 20:00`）+ 剩余百分比
+- 周窗口：显示日期范围（如 `2026-04-27 ~ 2026-05-04`）+ 剩余百分比
 - 点击 Widget 跳转 App 主页
 
 ---
