@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Solar icon: code-bold-duotone
+  Source: https://icon-sets.iconify.design/solar/code-bold-duotone/
+  License: CC BY 4.0 (480 Design)
+  24x24 viewport, duotone (foreground path + background slash at 50% opacity)
+  Adaptive icon foreground — centered in 108x108 safe zone (translate 42,42)
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!--
+      24x24 icon scaled 1.15x → ~28x28 (matches ikuuu vpn_key visual size)
+      Centered: (108 - 24*1.15) / 2 = 40.2 → translate(40, 40)
+      Visual footprint: ~27% of viewport (similar to ikuuu)
+    -->
+    <group android:scaleX="1.15" android:scaleY="1.15" android:translateX="40" android:translateY="40">
+        <!-- Foreground: </> brackets — primary color (100%) -->
+        <path
+            android:fillColor="@color/primaryForeground"
+            android:pathData="M16.443,7.328a0.75,0.75 0,0 1,1.059 -0.056l1.737,1.564c0.737,0.663 1.347,1.212 1.767,1.71c0.44,0.525 0.754,1.088 0.754,1.784c0,0.695 -0.313,1.258 -0.754,1.782c-0.42,0.499 -1.03,1.049 -1.767,1.711l-1.737,1.564a0.75,0.75 0,1 1,-1.004 -1.115l1.697,-1.527c0.788,-0.709 1.319,-1.19 1.663,-1.598c0.33,-0.393 0.402,-0.622 0.402,-0.817c0,-0.196 -0.072,-0.425 -0.402,-0.818c-0.344,-0.409 -0.875,-0.889 -1.663,-1.598l-1.697,-1.527a0.75,0.75 0,0 1,-0.056 -1.06m-8.94,1.06a0.75,0.75 0,0 0,-1.004 -1.115L4.761,8.836c-0.737,0.663 -1.347,1.212 -1.767,1.71c-0.44,0.525 -0.754,1.088 -0.754,1.784c0,0.695 0.313,1.258 0.754,1.782c0.42,0.499 1.03,1.049 1.767,1.711l1.737,1.564a0.75,0.75 0,1 0,1.004 -1.115l-1.697,-1.527c-0.788,-0.709 -1.319,-1.19 -1.663,-1.598c-0.33,-0.393 -0.402,-0.622 -0.402,-0.817c0,-0.196 0.072,-0.425 0.402,-0.818c0.344,-0.409 0.875,-0.889 1.663,-1.598z" />
+        <!-- Background: \ slash — secondary color (50% opacity for duotone effect) -->
+        <path
+            android:fillColor="@color/primaryForegroundSecondary"
+            android:pathData="M14.182,4.276a0.75,0.75 0,0 1,0.53 0.918l-3.974,14.83a0.75,0.75 0,1 1,-1.449 -0.389l3.974,-14.83a0.75,0.75 0,0 1,0.919 -0.53"
+            android:fillAlpha="0.5" />
+    </group>
+</vector>

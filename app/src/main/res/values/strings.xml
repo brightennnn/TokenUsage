@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MiniMax Token Monitor</string>
+    <string name="widget_interval_description">5小时用量</string>
+    <string name="widget_weekly_description">本周用量</string>
+    <string name="widget_combined_description">MiniMax 合并用量</string>
+</resources>
