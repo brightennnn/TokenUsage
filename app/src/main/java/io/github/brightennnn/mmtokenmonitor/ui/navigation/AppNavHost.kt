@@ -61,6 +61,9 @@ fun AppNavHost(
     // Track current tab index
     var currentTabIndex by rememberSaveable { mutableStateOf(0) }
 
+    // 来自 Home 的 deep-link 请求 — 切到 Settings tab 并跳到 GLM 凭证页
+    var pendingGlmCredentialNav by remember { mutableStateOf(false) }
+
     // Bottom bar visibility:下滑隐藏，上滑显示
     var isBottomBarVisible by rememberSaveable { mutableStateOf(true) }
 
@@ -119,9 +122,18 @@ fun AppNavHost(
         when (currentTabIndex) {
             0 -> HomeScreen(
                 themeRepository = themeRepository,
-                lazyListState = homeListState
+                lazyListState = homeListState,
+                onNavigateToGlmCredential = {
+                    HapticFeedback.perform(view)
+                    pendingGlmCredentialNav = true
+                    currentTabIndex = 1
+                }
             )
-            1 -> SettingsNavHost(themeRepository = themeRepository)
+            1 -> SettingsNavHost(
+                themeRepository = themeRepository,
+                pendingGlmCredential = pendingGlmCredentialNav,
+                onPendingGlmCredentialConsumed = { pendingGlmCredentialNav = false }
+            )
         }
 
         // Floating bottom nav with MD3E-style animation

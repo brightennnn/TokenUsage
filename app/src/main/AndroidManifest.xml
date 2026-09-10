@@ -45,6 +45,30 @@
                 android:resource="@xml/glance_weekly_widget_info" />
         </receiver>
 
+        <!-- GLM 5小时窗口 Widget -->
+        <receiver
+            android:name=".widget.GlanceGlmIntervalWidgetReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/glance_glm_interval_widget_info" />
+        </receiver>
+
+        <!-- GLM 周窗口 Widget -->
+        <receiver
+            android:name=".widget.GlanceGlmWeeklyWidgetReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/glance_glm_weekly_widget_info" />
+        </receiver>
+
         <!-- 壁纸变化监听器 -->
         <receiver
             android:name=".widget.WallpaperChangedReceiver"

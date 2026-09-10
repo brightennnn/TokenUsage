@@ -19,7 +19,13 @@ import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "minimax_token_prefs")
+/**
+ * 模块内共享的 DataStore（token + GLM JWT 都存在这里）。
+ *
+ * 顶层属性 — 整个 app 模块可见，保证只有一个 DataStore 实例。
+ * 命名 = "minimax_token_prefs" 保持向后兼容（旧版本数据不会丢）。
+ */
+internal val Context.tokenDataStore: DataStore<Preferences> by preferencesDataStore(name = "minimax_token_prefs")
 
 @Singleton
 class TokenRepositoryImpl @Inject constructor(
@@ -32,20 +38,20 @@ class TokenRepositoryImpl @Inject constructor(
         val ACTIVE_API_KEY_ID = stringPreferencesKey("active_api_key_id")
     }
 
-    override val apiKeyProfiles: Flow<List<ApiKeyProfile>> = context.dataStore.data
+    override val apiKeyProfiles: Flow<List<ApiKeyProfile>> = context.tokenDataStore.data
         .map { prefs ->
             val json = prefs[PrefsKeys.API_KEY_PROFILES] ?: "[]"
             parseProfiles(json)
         }
 
-    override val activeApiKey: Flow<String?> = context.dataStore.data
+    override val activeApiKey: Flow<String?> = context.tokenDataStore.data
         .map { prefs ->
             val profiles = parseProfiles(prefs[PrefsKeys.API_KEY_PROFILES] ?: "[]")
             val activeId = prefs[PrefsKeys.ACTIVE_API_KEY_ID]
             profiles.find { it.id == activeId }?.key
         }
 
-    override val activeGroupId: Flow<String?> = context.dataStore.data
+    override val activeGroupId: Flow<String?> = context.tokenDataStore.data
         .map { prefs ->
             val profiles = parseProfiles(prefs[PrefsKeys.API_KEY_PROFILES] ?: "[]")
             val activeId = prefs[PrefsKeys.ACTIVE_API_KEY_ID]
@@ -86,7 +92,7 @@ class TokenRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveApiKey(key: String, name: String, groupId: String) {
-        context.dataStore.edit { prefs ->
+        context.tokenDataStore.edit { prefs ->
             val profiles = parseProfiles(prefs[PrefsKeys.API_KEY_PROFILES] ?: "[]").toMutableList()
             // 新 Key 默认不激活
             profiles.add(ApiKeyProfile(name = name, key = key.trim(), groupId = groupId.trim()))
@@ -95,7 +101,7 @@ class TokenRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateApiKeyProfile(profile: ApiKeyProfile) {
-        context.dataStore.edit { prefs ->
+        context.tokenDataStore.edit { prefs ->
             val profiles = parseProfiles(prefs[PrefsKeys.API_KEY_PROFILES] ?: "[]").toMutableList()
             val index = profiles.indexOfFirst { it.id == profile.id }
             if (index >= 0) {
@@ -106,7 +112,7 @@ class TokenRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteApiKeyProfile(id: String) {
-        context.dataStore.edit { prefs ->
+        context.tokenDataStore.edit { prefs ->
             val profiles = parseProfiles(prefs[PrefsKeys.API_KEY_PROFILES] ?: "[]").toMutableList()
             profiles.removeAll { it.id == id }
             // 如果删除的是激活的，清除激活状态
@@ -119,7 +125,7 @@ class TokenRepositoryImpl @Inject constructor(
     }
 
     override suspend fun setActiveApiKey(id: String) {
-        context.dataStore.edit { prefs ->
+        context.tokenDataStore.edit { prefs ->
             val profiles = parseProfiles(prefs[PrefsKeys.API_KEY_PROFILES] ?: "[]").toMutableList()
             profiles.forEachIndexed { index, profile ->
                 profiles[index] = profile.copy(isActive = profile.id == id)
@@ -130,7 +136,7 @@ class TokenRepositoryImpl @Inject constructor(
     }
 
     override suspend fun clearAllApiKeys() {
-        context.dataStore.edit { prefs ->
+        context.tokenDataStore.edit { prefs ->
             prefs.remove(PrefsKeys.API_KEY_PROFILES)
             prefs.remove(PrefsKeys.ACTIVE_API_KEY_ID)
         }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Dns
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Info
@@ -25,6 +26,7 @@ import io.github.brightennnn.mmtokenmonitor.ui.theme.VerveDoDefaults
 fun SettingsMainScreen(
     onNavigateToAppearance: () -> Unit,
     onNavigateToApiKey: () -> Unit,
+    onNavigateToGlmCredential: () -> Unit,
     onNavigateToAbout: () -> Unit,
     onNavigateToCredits: () -> Unit,
 ) {
@@ -54,6 +56,18 @@ fun SettingsMainScreen(
                     onClick = {
                         HapticFeedback.perform(view)
                         onNavigateToApiKey()
+                    }
+                )
+            }
+
+            item {
+                VerveDoSettingsItem(
+                    leadingIcon = Icons.Default.AutoAwesome,
+                    title = "GLM Coding Plan 凭证",
+                    description = "智谱 BigModel JWT,用于查询 5小时/周窗用量",
+                    onClick = {
+                        HapticFeedback.perform(view)
+                        onNavigateToGlmCredential()
                     }
                 )
             }

@@ -20,6 +20,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.brightennnn.mmtokenmonitor.data.repository.ThemeRepository
 import io.github.brightennnn.mmtokenmonitor.domain.model.ModelQuota
+import io.github.brightennnn.mmtokenmonitor.ui.components.GlmErrorCard
+import io.github.brightennnn.mmtokenmonitor.ui.components.GlmNotConfiguredCard
+import io.github.brightennnn.mmtokenmonitor.ui.components.GlmQuotaCard
+import io.github.brightennnn.mmtokenmonitor.ui.components.GlmSectionHeader
+import io.github.brightennnn.mmtokenmonitor.ui.components.MinimaxSectionHeader
 import io.github.brightennnn.mmtokenmonitor.ui.components.HapticFeedback
 import io.github.brightennnn.mmtokenmonitor.ui.components.LocalHapticFeedbackEnabled
 import dagger.hilt.android.EntryPointAccessors
@@ -32,7 +37,8 @@ import java.time.format.DateTimeFormatter
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     themeRepository: ThemeRepository? = null,
-    lazyListState: LazyListState = rememberLazyListState()
+    lazyListState: LazyListState = rememberLazyListState(),
+    onNavigateToGlmCredential: () -> Unit = {},
 ) {
     val view = LocalView.current
     val uiState by viewModel.uiState.collectAsState()
@@ -42,11 +48,19 @@ fun HomeScreen(
 
     val pullToRefreshState = rememberPullToRefreshState()
 
+    // GLM 凭证页跳转触发
+    LaunchedEffect(uiState.glmNavigateToCredential) {
+        if (uiState.glmNavigateToCredential) {
+            viewModel.consumeGlmCredentialNavigation()
+            onNavigateToGlmCredential()
+        }
+    }
+
     CompositionLocalProvider(LocalHapticFeedbackEnabled provides (themeSettings?.hapticFeedback ?: true)) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("MiniMax Token Monitor") },
+                    title = { Text("Plan Usage") },
                     actions = {
                         if (uiState.hasKey) {
                             IconButton(
@@ -116,18 +130,60 @@ fun HomeScreen(
                 }
 
                 val generalQuota = uiState.quotas.firstOrNull { it.modelName.equals("general", ignoreCase = true) }
+                val hasMinimaxCard = generalQuota != null
 
-                if (generalQuota != null) {
+                if (hasMinimaxCard || uiState.hasGlmKey || uiState.glmError != null) {
                     LazyColumn(
                         state = lazyListState,
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        item { IntervalCard(quota = generalQuota) }
-                        item { WeeklyCard(quota = generalQuota) }
+                        // --- MiniMax 卡片 ---
+                        if (generalQuota != null) {
+                            item { MinimaxSectionHeader() }
+                            item { IntervalCard(quota = generalQuota) }
+                            item { WeeklyCard(quota = generalQuota) }
+                        }
+
+                        // --- GLM Section ---
+                        item { GlmSectionHeader(level = uiState.glmLevel, hasError = uiState.glmError != null) }
+
+                        when {
+                            !uiState.hasGlmKey -> {
+                                item {
+                                    GlmNotConfiguredCard(
+                                        onClick = { viewModel.requestGlmCredentialNavigation() }
+                                    )
+                                }
+                            }
+                            uiState.glmError != null && uiState.glmQuotas.isEmpty() -> {
+                                item {
+                                    GlmErrorCard(
+                                        message = uiState.glmError ?: "未知错误",
+                                        onClick = { viewModel.requestGlmCredentialNavigation() }
+                                    )
+                                }
+                            }
+                            else -> {
+                                // 5小时窗、周窗（过滤掉 MCP 月窗 rawUnit=5）
+                                uiState.glmQuotas.filter { it.rawUnit != 5 }.forEach { quota ->
+                                    item(key = "glm-${quota.rawUnit}") {
+                                        GlmQuotaCard(quota = quota)
+                                    }
+                                }
+                                if (uiState.isGlmLoading) {
+                                    item {
+                                        Box(
+                                            modifier = Modifier.fillMaxWidth().padding(8.dp),
+                                            contentAlignment = Alignment.Center
+                                        ) { CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp) }
+                                    }
+                                }
+                            }
+                        }
                     }
-                } else if (uiState.hasKey && uiState.error == null && !uiState.isLoading) {
+                } else if (uiState.hasKey && uiState.error == null && !uiState.isLoading && !uiState.isGlmLoading) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center

@@ -55,11 +55,11 @@ class GlanceWeeklyWidget : GlanceAppWidget() {
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text(
-                        text = "本周剩余",
+                        text = "MiniMax 本周剩余",
                         style = TextStyle(
                             color = ColorProvider(colors.onSurface, colors.onSurface),
                             fontWeight = FontWeight.Medium,
-                            fontSize = 14.sp
+                            fontSize = 12.sp
                         )
                     )
                     Spacer(GlanceModifier.height(8.dp))
@@ -71,7 +71,7 @@ class GlanceWeeklyWidget : GlanceAppWidget() {
                             fontSize = 28.sp
                         )
                     )
-                    Spacer(GlanceModifier.height(5.dp))
+                    Spacer(GlanceModifier.height(12.dp))
                     Text(
                         text = data.weeklyPeriod,
                         style = TextStyle(
@@ -113,7 +113,7 @@ class GlanceWeeklyWidget : GlanceAppWidget() {
                     modifier = GlanceModifier
                         .fillMaxSize()
                         .padding(8.dp),
-                    contentAlignment = Alignment.TopEnd
+                    contentAlignment = Alignment.BottomEnd
                 ) {
                     Box(
                         modifier = GlanceModifier

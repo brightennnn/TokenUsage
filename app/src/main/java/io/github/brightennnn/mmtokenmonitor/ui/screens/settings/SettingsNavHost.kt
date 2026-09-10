@@ -18,11 +18,13 @@ import io.github.brightennnn.mmtokenmonitor.data.repository.ThemeRepository
 import io.github.brightennnn.mmtokenmonitor.ui.components.HapticFeedback
 import io.github.brightennnn.mmtokenmonitor.ui.components.LocalHapticFeedbackEnabled
 import io.github.brightennnn.mmtokenmonitor.ui.screens.settings.apikey.ApiKeyManagementScreenWrapper
+import io.github.brightennnn.mmtokenmonitor.ui.screens.settings.glm.GlmCredentialScreenWrapper
 
 object SettingsRoute {
     const val MAIN = "settings_main"
     const val APPEARANCE = "settings_appearance"
     const val API_KEY = "settings_api_key"
+    const val GLM_CREDENTIAL = "settings_glm_credential"
     const val ABOUT = "settings_about"
     const val CREDITS = "settings_credits"
 }
@@ -39,7 +41,9 @@ private fun AnimatedContentTransitionScope<NavBackStackEntry>.defaultExitTransit
 
 @Composable
 fun SettingsNavHost(
-    themeRepository: ThemeRepository
+    themeRepository: ThemeRepository,
+    pendingGlmCredential: Boolean = false,
+    onPendingGlmCredentialConsumed: () -> Unit = {},
 ) {
     val navController = rememberNavController()
     val settingsViewModel: SettingsViewModel = hiltViewModel()
@@ -48,6 +52,14 @@ fun SettingsNavHost(
     androidx.compose.runtime.CompositionLocalProvider(
         LocalHapticFeedbackEnabled provides themeSettings.hapticFeedback
     ) {
+        // 来自 Home 的 deep-link 请求 → 切到 GLM 凭证页
+        androidx.compose.runtime.LaunchedEffect(pendingGlmCredential) {
+            if (pendingGlmCredential) {
+                navController.navigate(SettingsRoute.GLM_CREDENTIAL)
+                onPendingGlmCredentialConsumed()
+            }
+        }
+
         NavHost(
             navController = navController,
             startDestination = SettingsRoute.MAIN,
@@ -60,6 +72,7 @@ fun SettingsNavHost(
                 SettingsMainScreen(
                     onNavigateToAppearance = { navController.navigate(SettingsRoute.APPEARANCE) },
                     onNavigateToApiKey = { navController.navigate(SettingsRoute.API_KEY) },
+                    onNavigateToGlmCredential = { navController.navigate(SettingsRoute.GLM_CREDENTIAL) },
                     onNavigateToAbout = { navController.navigate(SettingsRoute.ABOUT) },
                     onNavigateToCredits = { navController.navigate(SettingsRoute.CREDITS) }
                 )
@@ -93,6 +106,18 @@ fun SettingsNavHost(
                 popExitTransition = { defaultExitTransition() }
             ) {
                 ApiKeyManagementScreenWrapper(
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = SettingsRoute.GLM_CREDENTIAL,
+                enterTransition = { defaultEnterTransition() },
+                exitTransition = { defaultExitTransition() },
+                popEnterTransition = { defaultEnterTransition() },
+                popExitTransition = { defaultExitTransition() }
+            ) {
+                GlmCredentialScreenWrapper(
                     onNavigateBack = { navController.popBackStack() }
                 )
             }
