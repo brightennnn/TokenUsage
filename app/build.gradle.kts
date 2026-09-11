@@ -22,8 +22,8 @@ android {
         applicationId = "io.github.brightennnn.mmtokenmonitor"
         minSdk = 34
         targetSdk = 35
-        versionCode = 4
-        versionName = "1.2.0"
+        versionCode = 6
+        versionName = "1.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,11 +33,9 @@ android {
 
     buildTypes {
         debug {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            // debug 不开 R8 — 抓 log 时保留完整类名
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
         release {
             isMinifyEnabled = true
@@ -100,6 +98,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.50")
     ksp("com.google.dagger:hilt-android-compiler:2.50")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    // WorkManager (后台 widget 刷新 — 自定义 WorkerFactory + Configuration.Provider)
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
 
     // Retrofit + OkHttp
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

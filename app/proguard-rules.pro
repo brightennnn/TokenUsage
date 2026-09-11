@@ -41,6 +41,18 @@
 -keep,allowobfuscation,allowshrinking class * extends androidx.lifecycle.ViewModel { *; }
 -keep,allowobfuscation,allowshrinking class * extends androidx.lifecycle.AndroidViewModel { *; }
 
+# Hilt + WorkManager (@HiltWorker + AssistedInject)
+-keep class androidx.hilt.work.** { *; }
+-keep class * extends androidx.work.ListenableWorker {
+    public <init>(android.content.Context, androidx.work.WorkerParameters);
+}
+-keepclasseswithmembers class * {
+    @dagger.assisted.AssistedInject <init>(...);
+}
+-keepclasseswithmembers class * {
+    @dagger.assisted.AssistedFactory <methods>;
+}
+
 # Keep data classes for Gson serialization
 -keep class io.github.brightennnn.mmtokenmonitor.data.remote.** { *; }
 -keep class io.github.brightennnn.mmtokenmonitor.data.** { *; }
