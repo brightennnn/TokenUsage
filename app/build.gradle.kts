@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "io.github.brightennnn.mmtokenmonitor"
+    namespace = "io.github.brightennnn.tokenusage"
     compileSdk = 35
 
     signingConfigs {
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "io.github.brightennnn.mmtokenmonitor"
+        applicationId = "io.github.brightennnn.tokenusage"
         minSdk = 34
         targetSdk = 35
         versionCode = 8

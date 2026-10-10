@@ -54,9 +54,9 @@
 }
 
 # Keep data classes for Gson serialization
--keep class io.github.brightennnn.mmtokenmonitor.data.remote.** { *; }
--keep class io.github.brightennnn.mmtokenmonitor.data.** { *; }
--keep class io.github.brightennnn.mmtokenmonitor.domain.model.** { *; }
+-keep class io.github.brightennnn.tokenusage.data.remote.** { *; }
+-keep class io.github.brightennnn.tokenusage.data.** { *; }
+-keep class io.github.brightennnn.tokenusage.domain.model.** { *; }
 
 # Keep Retrofit generic type information
 -keep,allowobfuscation,allowshrinking class retrofit2.Response

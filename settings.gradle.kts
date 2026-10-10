@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MiniMaxToken"
+rootProject.name = "TokenUsage"
 include(":app")

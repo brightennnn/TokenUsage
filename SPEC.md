@@ -1,8 +1,8 @@
-# MiniMax Token 查询 — App 规格说明书
+# Token Usage — App 规格说明书
 
 ## 1. 项目概述
 
-- **名称**：MiniMax Token
+- **名称**：Token Usage
 - **类型**：Android 原生应用
 - **一句话描述**：查询 MiniMax API Key 的 token 额度使用情况，支持桌面微件。
 - **目标用户**：土豪本人
