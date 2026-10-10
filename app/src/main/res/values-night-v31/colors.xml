@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  暗色模式 launcher icon（API 31+），真正 Monet 跟随系统壁纸
+  背景：system_accent1_900（深紫，跟随动态取色）
+  前景：system_accent1_100（浅紫）
+  次前景：system_accent1_200（中等浅紫）
+-->
+<resources>
+    <color name="primaryBackground">@android:color/system_accent1_900</color>
+    <color name="primaryForeground">@android:color/system_accent1_100</color>
+    <color name="primaryForegroundSecondary">@android:color/system_accent1_200</color>
+</resources>

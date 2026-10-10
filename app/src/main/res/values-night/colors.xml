@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  暗色模式 launcher icon fallback（API 21-30，不支持 system_* 引用）
+  背景：深紫（accent1_900 等价色）
+  前景/次前景：浅紫（accent1_100/200 等价色）
+-->
 <resources>
-    <!-- Widget 背景色 - 深色模式不透明 -->
-    <color name="widget_background">#FF1C1B1F</color>
-
-    <!-- Widget 进度条填充色 -->
-    <color name="widget_progress_fill">#FFCFBCFF</color>
-
-    <!-- Widget 文字颜色 - 深色模式 -->
-    <color name="widget_text_primary">#FFFFFFFF</color>
-    <color name="widget_text_secondary">#B3FFFFFF</color>
-
-    <!-- Widget 文字颜色（跟随系统明暗，Kotlin 动态覆盖用） -->
-    <color name="widget_color_on_surface">#FFFFFFFF</color>
-    <color name="widget_color_on_surface_variant">#B3FFFFFF</color>
-
-    <!-- Launcher Icon - 深色模式 -->
-    <color name="primaryBackground">@android:color/system_accent2_800</color>
-    <color name="primaryForeground">@android:color/system_accent1_200</color>
-    <color name="primaryForegroundSecondary">@android:color/system_accent1_200</color>
+    <color name="primaryBackground">#FF21005D</color>
+    <color name="primaryForeground">#FFD0BCFF</color>
+    <color name="primaryForegroundSecondary">#FFB69DF8</color>
 </resources>

@@ -90,5 +90,6 @@ class GlmWidgetUpdater @Inject constructor(
         } catch (e: Exception) {
             Log.e("GlmWidget", "Failed to update GLM weekly widget", e)
         }
+
     }
 }
