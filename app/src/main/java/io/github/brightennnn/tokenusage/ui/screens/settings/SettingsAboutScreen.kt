@@ -32,6 +32,22 @@ fun SettingsAboutScreen(
     val view = LocalView.current
     val context = LocalContext.current
 
+    // 动态读取 PackageInfo 显示当前版本号 — 不要写死，跟 build.gradle.kts 的 versionName 同步
+    val versionDisplay = remember(context) {
+        try {
+            val pi = context.packageManager.getPackageInfo(context.packageName, 0)
+            val name = pi.versionName ?: "未知"
+            val code = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                pi.longVersionCode
+            } else {
+                @Suppress("DEPRECATION") pi.versionCode.toLong()
+            }
+            "$name ($code)"
+        } catch (e: Exception) {
+            "未知"
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -66,7 +82,7 @@ fun SettingsAboutScreen(
                     )
                 },
                 title = "版本号",
-                subtitle = "1.1.2",
+                subtitle = versionDisplay,
                 onClick = null
             )
 
