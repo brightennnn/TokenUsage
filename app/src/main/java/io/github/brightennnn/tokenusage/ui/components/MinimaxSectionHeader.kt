@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 
 /**
  * MiniMax Section Header — 对标 GlmSectionHeader
- * - 标题: "MiniMax Token Plan"
- * - 副标题: 写死的套餐名 "TokenPlanPlus-月度会员"
+ * - 标题: "MiniMax"（2026-10-16 用户拍板：去掉 Token Plan 字样）
+ * - 右侧 badge: 写死的套餐名 "TokenPlanPlus-月度会员"
  */
 @Composable
 fun MinimaxSectionHeader(
@@ -37,7 +37,7 @@ fun MinimaxSectionHeader(
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = "MiniMax Token Plan",
+            text = "MiniMax",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
             fontWeight = FontWeight.SemiBold

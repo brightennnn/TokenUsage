@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,6 +22,14 @@ import io.github.brightennnn.tokenusage.domain.model.GlmQuota
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+
+/**
+ * 上标序号：1 → ¹，2 → ²，3 → ³ … 超出 9 回退成普通数字。
+ */
+private fun superscript(n: Int): String {
+    val marks = listOf("⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹")
+    return if (n in 1..9) marks[n] else n.toString()
+}
 
 /**
  * GLM 单窗口卡片。对齐 MiniMax IntervalCard/WeeklyCard 的字段和布局，
@@ -107,12 +119,88 @@ fun GlmQuotaCard(
                     .weight(1f)
                     .padding(horizontal = 20.dp, vertical = 16.dp)
             ) {
-                // 标题
-                Text(
-                    text = title,
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                // 标题行：左侧标题，右侧「用量重置额度N次 + 最早过期时间」
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = title,
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.weight(1f)
+                    )
+                    val resetCount = quota.resetQuotaCount
+                    val resetExpire = quota.resetQuotaExpireMs
+                    val resetExpireList = quota.resetQuotaExpireList
+                    if (resetCount != null && resetCount > 0) {
+                        // 逐张列出过期时间；无解析出时间的券折叠成「最早过期」
+                        val expireRows = remember(resetExpireList, resetExpire) {
+                            if (resetExpireList.isNotEmpty()) {
+                                resetExpireList.map {
+                                    Instant.ofEpochMilli(it).atZone(beijingZone).format(dateTimeFormatter)
+                                }
+                            } else if (resetExpire != null) {
+                                listOf(
+                                    Instant.ofEpochMilli(resetExpire).atZone(beijingZone).format(dateTimeFormatter)
+                                )
+                            } else emptyList()
+                        }
+                        // 默认只显示「可重置N次」；点击后弹出过期时间，点击别处自动消失
+                        var menuOpen by remember { mutableStateOf(false) }
+                        Box {
+                            Text(
+                                text = "可重置${resetCount}次",
+                                fontSize = 11.sp,
+                                color = MaterialTheme.colorScheme.primary,
+                                maxLines = 1,
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(6.dp))
+                                    .clickable { menuOpen = true }
+                                    .padding(horizontal = 4.dp, vertical = 2.dp)
+                            )
+                            DropdownMenu(
+                                expanded = menuOpen,
+                                onDismissRequest = { menuOpen = false },
+                                shape = RoundedCornerShape(16.dp),
+                                modifier = Modifier
+                                    .background(
+                                        MaterialTheme.colorScheme.surfaceContainerHigh,
+                                        RoundedCornerShape(16.dp)
+                                    )
+                            ) {
+                                if (expireRows.isEmpty()) {
+                                    Text(
+                                        text = "有效期未知",
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        modifier = Modifier
+                                            .padding(horizontal = 16.dp, vertical = 12.dp)
+                                    )
+                                } else {
+                                    Text(
+                                        text = "过期时间",
+                                        fontSize = 11.sp,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        modifier = Modifier.padding(
+                                            horizontal = 16.dp, vertical = 10.dp
+                                        )
+                                    )
+                                    expireRows.forEachIndexed { index, row ->
+                                        Text(
+                                            text = "${superscript(index + 1)} $row",
+                                            fontSize = 12.sp,
+                                            color = MaterialTheme.colorScheme.onSurface,
+                                            modifier = Modifier.padding(
+                                                start = 22.dp, end = 16.dp, top = 3.dp, bottom = 3.dp
+                                            )
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 Spacer(modifier = Modifier.height(2.dp))
                 // 副标题: 窗口时间范围
                 Text(
@@ -196,7 +284,7 @@ fun GlmSectionHeader(
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = "GLM Coding Plan",
+            text = "智谱",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
             fontWeight = FontWeight.SemiBold
@@ -208,19 +296,13 @@ fun GlmSectionHeader(
                 color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
             ) {
                 Text(
-                    text = level.uppercase(),
+                    text = level.replaceFirstChar { it.uppercase() }.lowercase(),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                 )
             }
         }
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = "智谱 BigModel",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-        )
     }
 }
 

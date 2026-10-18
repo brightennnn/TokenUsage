@@ -9,6 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import io.github.brightennnn.tokenusage.data.remote.MiniMaxApi
 import io.github.brightennnn.tokenusage.domain.model.ApiKeyProfile
 import io.github.brightennnn.tokenusage.domain.model.ModelQuota
+import io.github.brightennnn.tokenusage.domain.repository.MiniMaxWebTokenRepository
 import io.github.brightennnn.tokenusage.domain.repository.TokenRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -30,7 +31,10 @@ internal val Context.tokenDataStore: DataStore<Preferences> by preferencesDataSt
 @Singleton
 class TokenRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val api: MiniMaxApi
+    private val api: MiniMaxApi,
+    // 用量重置额度（重置券）需网页登录 _token，走独立 Repository/Retrofit。
+    // 拉券失败不拖垮配额主流程。
+    private val webTokenRepository: MiniMaxWebTokenRepository
 ) : TokenRepository {
 
     private object PrefsKeys {
@@ -145,6 +149,19 @@ class TokenRepositoryImpl @Inject constructor(
     override suspend fun fetchQuotas(apiKey: String, groupId: String): Result<List<ModelQuota>> {
         return try {
             val response = api.getTokenPlan("Bearer $apiKey", groupId)
+            // 用量重置额度（重置券）：需网页登录 _token，独立接口、独立 Retrofit 实例。
+            // 失败/未配置不拖垮配额主流程 → 字段留 null，UI 不渲染该行。
+            val resetCards = runCatching { webTokenRepository.fetchResetCards() }
+                .getOrNull()
+                ?.getOrNull()
+                .orEmpty()
+                .filterNot { it.isExpired }
+            val resetExpireList = resetCards.map { it.expireTimeMs }.sorted()
+            val resetInfo: Pair<Int, Long?>? = if (resetCards.isEmpty()) {
+                null
+            } else {
+                resetCards.size to resetExpireList.minOrNull()
+            }
             val quotas = response.modelRemains.map { dto ->
                 ModelQuota(
                     modelName = dto.modelName,
@@ -163,7 +180,10 @@ class TokenRepositoryImpl @Inject constructor(
                     intervalRemainsMs = dto.remainsTime,
                     weeklyRemainsMs = dto.weeklyRemainsTime,
                     intervalBoostPermille = dto.intervalBoostPermille,
-                    weeklyBoostPermille = dto.weeklyBoostPermille
+                    weeklyBoostPermille = dto.weeklyBoostPermille,
+                    resetQuotaCount = resetInfo?.first,
+                    resetQuotaExpireList = resetExpireList,
+                    resetQuotaExpireMs = resetInfo?.second
                 )
             }
             Result.success(quotas)

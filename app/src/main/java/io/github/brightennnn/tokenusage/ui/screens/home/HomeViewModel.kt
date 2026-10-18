@@ -137,6 +137,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    /** 智谱独立页的下拉刷新 / 刷新按钮 — 只重拉 GLM，不动 MiniMax */
+    fun refreshGlm() {
+        fetchGlm()
+    }
+
     /** 由 GLM 错误卡点击触发 — 通知 Home 跳转到 Settings 的 GLM 凭证页 */
     fun requestGlmCredentialNavigation() {
         _uiState.update { it.copy(glmNavigateToCredential = true) }

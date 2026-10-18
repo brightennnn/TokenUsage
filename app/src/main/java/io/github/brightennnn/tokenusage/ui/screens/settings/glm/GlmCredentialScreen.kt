@@ -52,7 +52,7 @@ fun GlmCredentialScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("BigModel JWT管理") },
+                title = { Text("智谱账号管理") },
                 navigationIcon = {
                     IconButton(onClick = {
                         HapticFeedback.perform(view)

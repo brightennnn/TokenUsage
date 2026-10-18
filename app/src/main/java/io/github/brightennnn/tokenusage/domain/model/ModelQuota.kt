@@ -18,5 +18,10 @@ data class ModelQuota(
     val intervalRemainsMs: Long = 0L,
     val weeklyRemainsMs: Long = 0L,
     val intervalBoostPermille: Int = 0,
-    val weeklyBoostPermille: Int = 0
+    val weeklyBoostPermille: Int = 0,
+    // 用量重置额度（重置券）— 仅挂「本周剩余量」卡片（前端语义 fullReset = 完整重置，用户拍板归本周）
+    // null = 未配置 _token 或拉取失败 → UI 不渲染该行（与 GLM 同策略）
+    val resetQuotaCount: Int? = null,
+    val resetQuotaExpireList: List<Long> = emptyList(),
+    val resetQuotaExpireMs: Long? = null
 )

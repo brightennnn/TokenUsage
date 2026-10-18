@@ -6,9 +6,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.brightennnn.tokenusage.data.remote.GlmApi
 import io.github.brightennnn.tokenusage.data.remote.MiniMaxApi
+import io.github.brightennnn.tokenusage.data.remote.MiniMaxWebApi
 import io.github.brightennnn.tokenusage.data.repository.GlmRepositoryImpl
+import io.github.brightennnn.tokenusage.data.repository.MiniMaxWebTokenRepositoryImpl
 import io.github.brightennnn.tokenusage.data.repository.TokenRepositoryImpl
 import io.github.brightennnn.tokenusage.domain.repository.GlmRepository
+import io.github.brightennnn.tokenusage.domain.repository.MiniMaxWebTokenRepository
 import io.github.brightennnn.tokenusage.domain.repository.TokenRepository
 import javax.inject.Singleton
 import javax.inject.Qualifier
@@ -28,6 +31,11 @@ annotation class MiniMaxRetrofit
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class GlmRetrofit
+
+/** 标识 MiniMax 网页控制台 BFF 的 Retrofit 实例（_token cookie 鉴权，仅用于重置额度查询） */
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class MiniMaxWebRetrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -79,6 +87,23 @@ object NetworkModule {
     fun provideGlmApi(@GlmRetrofit retrofit: Retrofit): GlmApi {
         return retrofit.create(GlmApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    @MiniMaxWebRetrofit
+    fun provideMiniMaxWebRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://www.minimax.cn/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMiniMaxWebApi(@MiniMaxWebRetrofit retrofit: Retrofit): MiniMaxWebApi {
+        return retrofit.create(MiniMaxWebApi::class.java)
+    }
 }
 
 @Module
@@ -92,4 +117,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindGlmRepository(impl: GlmRepositoryImpl): GlmRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindMiniMaxWebTokenRepository(impl: MiniMaxWebTokenRepositoryImpl): MiniMaxWebTokenRepository
 }

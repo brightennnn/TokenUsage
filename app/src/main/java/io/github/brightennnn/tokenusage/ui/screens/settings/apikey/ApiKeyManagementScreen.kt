@@ -20,6 +20,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -28,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import io.github.brightennnn.tokenusage.domain.model.ApiKeyProfile
 import androidx.compose.ui.platform.LocalView
 import io.github.brightennnn.tokenusage.ui.components.HapticFeedback
+import io.github.brightennnn.tokenusage.ui.screens.settings.minimaxweb.MiniMaxWebTokenUiState
 import io.github.brightennnn.tokenusage.ui.theme.VerveDoDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,21 +38,30 @@ import io.github.brightennnn.tokenusage.ui.theme.VerveDoDefaults
 fun ApiKeyManagementScreen(
     profiles: List<ApiKeyProfile>,
     activeProfileId: String?,
+    webTokenState: MiniMaxWebTokenUiState,
     onNavigateBack: () -> Unit,
     onAddKey: (name: String, key: String, groupId: String) -> Unit,
     onActivate: (id: String) -> Unit,
     onDelete: (id: String) -> Unit,
     onUpdateProfile: (ApiKeyProfile) -> Unit,
+    onWebTokenStartEditing: () -> Unit,
+    onWebTokenCancelEditing: () -> Unit,
+    onWebTokenDraftChange: (String) -> Unit,
+    onWebTokenToggleShow: () -> Unit,
+    onWebTokenSave: () -> Unit,
+    onWebTokenSaveAndTest: () -> Unit,
+    onWebTokenDelete: () -> Unit,
 ) {
     val view = LocalView.current
     var showAddDialog by remember { mutableStateOf(false) }
     var editingProfile by remember { mutableStateOf<ApiKeyProfile?>(null) }
     var profileToDelete by remember { mutableStateOf<ApiKeyProfile?>(null) }
+    var confirmWebTokenDelete by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("API Key 管理") },
+                title = { Text("MiniMax账号管理") },
                 navigationIcon = {
                     IconButton(onClick = {
                         HapticFeedback.perform(view)
@@ -69,44 +81,29 @@ fun ApiKeyManagementScreen(
             )
         }
     ) { innerPadding ->
-        if (profiles.isEmpty()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = innerPadding.calculateTopPadding())
-                    .padding(bottom = innerPadding.calculateBottomPadding()),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Spacer(modifier = Modifier.height(48.dp))
-                Icon(
-                    Icons.Default.Key,
-                    contentDescription = null,
-                    modifier = Modifier.size(64.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    "暂无 API Key",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    "点击右上角 + 添加第一个 Key",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = innerPadding.calculateTopPadding()),
+            contentPadding = PaddingValues(
+                vertical = VerveDoDefaults.screenVerticalPadding,
+                horizontal = 0.dp
+            )
+        ) {
+            // --- API Key（必填）---
+            item {
+                SectionLabel(
+                    title = "API Key",
+                    required = true,
+                    subtitle = "用于查询 5小时/本周用量"
                 )
             }
-        } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = innerPadding.calculateTopPadding()),
-                contentPadding = PaddingValues(
-                    vertical = VerveDoDefaults.screenVerticalPadding,
-                    horizontal = 0.dp
-                )
-            ) {
+
+            if (profiles.isEmpty()) {
+                item {
+                    EmptyApiKeyHint()
+                }
+            } else {
                 items(profiles, key = { it.id }) { profile ->
                     ApiKeyListItem(
                         profile = profile,
@@ -117,6 +114,30 @@ fun ApiKeyManagementScreen(
                     )
                 }
             }
+
+            // --- 网页凭证（选填，用于重置额度）---
+            item { Spacer(modifier = Modifier.height(VerveDoDefaults.settingsItemPadding)) }
+            item {
+                SectionLabel(
+                    title = "网页 Token",
+                    required = false,
+                    subtitle = "仅用于查询用量重置额度，不填不影响上面"
+                )
+            }
+            item {
+                MiniMaxWebTokenCard(
+                    state = webTokenState,
+                    onStartEditing = onWebTokenStartEditing,
+                    onCancelEditing = onWebTokenCancelEditing,
+                    onDraftChange = onWebTokenDraftChange,
+                    onToggleShow = onWebTokenToggleShow,
+                    onSave = onWebTokenSave,
+                    onSaveAndTest = onWebTokenSaveAndTest,
+                    onDelete = { confirmWebTokenDelete = true }
+                )
+            }
+
+            item { Spacer(modifier = Modifier.height(VerveDoDefaults.screenVerticalPadding)) }
         }
     }
 
@@ -168,6 +189,284 @@ fun ApiKeyManagementScreen(
                 }
             }
         )
+    }
+
+    if (confirmWebTokenDelete) {
+        AlertDialog(
+            onDismissRequest = { confirmWebTokenDelete = false },
+            title = { Text("删除网页 Token？") },
+            text = { Text("删除后将不再展示用量重置额度。此操作不可恢复。") },
+            confirmButton = {
+                TextButton(onClick = {
+                    HapticFeedback.perform(view)
+                    confirmWebTokenDelete = false
+                    onWebTokenDelete()
+                }) {
+                    Text("删除", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    HapticFeedback.perform(view)
+                    confirmWebTokenDelete = false
+                }) {
+                    Text("取消")
+                }
+            }
+        )
+    }
+}
+
+/** 分组小标题：「API Key」+（必填/选填）徽标 + 一行说明 */
+@Composable
+private fun SectionLabel(
+    title: String,
+    required: Boolean,
+    subtitle: String,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = VerveDoDefaults.screenHorizontalPadding,
+                vertical = 4.dp
+            ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Surface(
+            shape = MaterialTheme.shapes.small,
+            color = if (required) {
+                MaterialTheme.colorScheme.primaryContainer
+            } else {
+                MaterialTheme.colorScheme.surfaceContainerHighest
+            }
+        ) {
+            Text(
+                text = if (required) "必填" else "选填",
+                style = MaterialTheme.typography.labelSmall,
+                color = if (required) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.onSurfaceVariant
+                },
+                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+            )
+        }
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = subtitle,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+/** 无 API Key 时的引导卡（不再是整屏空态，因为下面还有网页 Token 卡片） */
+@Composable
+private fun EmptyApiKeyHint() {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = VerveDoDefaults.screenHorizontalPadding),
+        shape = MaterialTheme.shapes.large,
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+    ) {
+        Column(
+            modifier = Modifier.padding(VerveDoDefaults.settingsItemVerticalPadding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                Icons.Default.Key,
+                contentDescription = null,
+                modifier = Modifier.size(40.dp),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                "暂无 API Key",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "点击右上角 + 添加第一个 Key",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+/**
+ * 网页 Token（选填）凭证卡 — 从原独立页搬过来的卡片形态。
+ * 未配置态显示「未配置（选填）」+ 添加按钮，与 API Key 的多档位列表风格一致。
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun MiniMaxWebTokenCard(
+    state: MiniMaxWebTokenUiState,
+    onStartEditing: () -> Unit,
+    onCancelEditing: () -> Unit,
+    onDraftChange: (String) -> Unit,
+    onToggleShow: () -> Unit,
+    onSave: () -> Unit,
+    onSaveAndTest: () -> Unit,
+    onDelete: () -> Unit,
+) {
+    val view = LocalView.current
+
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = VerveDoDefaults.screenHorizontalPadding),
+        shape = MaterialTheme.shapes.large,
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+    ) {
+        Column(modifier = Modifier.padding(VerveDoDefaults.settingsItemVerticalPadding)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Key,
+                    contentDescription = null,
+                    tint = if (state.hasToken && !state.isExpired) MaterialTheme.colorScheme.primary
+                           else MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .padding(end = VerveDoDefaults.settingsItemHorizontalPadding)
+                        .height(24.dp)
+                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = if (!state.hasToken) "未配置"
+                               else if (state.isExpired) "已过期"
+                               else "已配置",
+                        style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
+                        color = if (state.hasToken && state.isExpired) MaterialTheme.colorScheme.error
+                               else MaterialTheme.colorScheme.onSurface
+                    )
+                    if (state.hasToken && !state.isEditing) {
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            text = buildString {
+                                append(state.tokenMasked)
+                                state.expiryText?.let { append("\n"); append(it) }
+                            },
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            fontFamily = FontFamily.Monospace
+                        )
+                    }
+                }
+                if (state.hasToken && !state.isEditing) {
+                    IconButton(onClick = {
+                        HapticFeedback.perform(view)
+                        onStartEditing()
+                    }) {
+                        Icon(Icons.Default.Edit, contentDescription = "编辑", tint = MaterialTheme.colorScheme.primary)
+                    }
+                    IconButton(onClick = {
+                        HapticFeedback.perform(view)
+                        onDelete()
+                    }) {
+                        Icon(Icons.Default.Delete, contentDescription = "删除", tint = MaterialTheme.colorScheme.error)
+                    }
+                } else if (!state.isEditing) {
+                    FilledTonalButton(onClick = {
+                        HapticFeedback.perform(view)
+                        onStartEditing()
+                    }) {
+                        Text("添加")
+                    }
+                }
+            }
+
+            if (state.isEditing) {
+                Spacer(Modifier.height(12.dp))
+                OutlinedTextField(
+                    value = state.draftToken,
+                    onValueChange = onDraftChange,
+                    label = { Text("网页 Token（选填）") },
+                    placeholder = { Text("粘贴 Cookie 或裸 JWT（eyJ...）") },
+                    singleLine = false,
+                    minLines = 2,
+                    maxLines = 4,
+                    visualTransformation = if (state.showToken) VisualTransformation.None
+                                            else PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    trailingIcon = {
+                        IconButton(onClick = {
+                            HapticFeedback.perform(view)
+                            onToggleShow()
+                        }) {
+                            Icon(
+                                if (state.showToken) Icons.Default.VisibilityOff
+                                else Icons.Default.Visibility,
+                                contentDescription = if (state.showToken) "隐藏" else "显示"
+                            )
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                if (state.error != null) {
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        state.error,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+
+                Spacer(Modifier.height(12.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TextButton(onClick = {
+                        HapticFeedback.perform(view)
+                        onCancelEditing()
+                    }) { Text("取消") }
+                    Spacer(Modifier.width(8.dp))
+                    OutlinedButton(
+                        onClick = {
+                            HapticFeedback.perform(view)
+                            onSaveAndTest()
+                        },
+                        enabled = !state.isLoading
+                    ) { Text("保存并测试") }
+                    Spacer(Modifier.width(8.dp))
+                    Button(
+                        onClick = {
+                            HapticFeedback.perform(view)
+                            onSave()
+                        },
+                        enabled = !state.isLoading
+                    ) { Text("保存") }
+                }
+            }
+
+            if (state.testResult != null) {
+                Spacer(Modifier.height(8.dp))
+                val ok = state.testResult.startsWith("测试成功")
+                Text(
+                    text = state.testResult,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = if (ok) MaterialTheme.colorScheme.primary
+                            else MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(start = 48.dp)
+                )
+            }
+        }
     }
 }
 

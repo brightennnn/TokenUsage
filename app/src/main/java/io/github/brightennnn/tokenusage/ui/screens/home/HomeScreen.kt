@@ -1,9 +1,12 @@
 package io.github.brightennnn.tokenusage.ui.screens.home
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
@@ -12,6 +15,7 @@ import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -20,10 +24,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.github.brightennnn.tokenusage.data.repository.ThemeRepository
 import io.github.brightennnn.tokenusage.domain.model.ModelQuota
-import io.github.brightennnn.tokenusage.ui.components.GlmErrorCard
-import io.github.brightennnn.tokenusage.ui.components.GlmNotConfiguredCard
-import io.github.brightennnn.tokenusage.ui.components.GlmQuotaCard
-import io.github.brightennnn.tokenusage.ui.components.GlmSectionHeader
 import io.github.brightennnn.tokenusage.ui.components.MinimaxSectionHeader
 import io.github.brightennnn.tokenusage.ui.components.HapticFeedback
 import io.github.brightennnn.tokenusage.ui.components.LocalHapticFeedbackEnabled
@@ -38,29 +38,25 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     themeRepository: ThemeRepository? = null,
     lazyListState: LazyListState = rememberLazyListState(),
-    onNavigateToGlmCredential: () -> Unit = {},
+    insightViewModel: MiniMaxInsightViewModel = hiltViewModel(),
 ) {
     val view = LocalView.current
     val uiState by viewModel.uiState.collectAsState()
+    val insightState by insightViewModel.uiState.collectAsState()
+
+    // 首次进入且已配 _token 时预加载积分 + 默认周期用量
+    LaunchedEffect(Unit) { insightViewModel.ensureLoaded() }
 
     val themeSettings by themeRepository?.themeSettings?.collectAsState(initial = null)
         ?: remember { mutableStateOf(null) }
 
     val pullToRefreshState = rememberPullToRefreshState()
 
-    // GLM 凭证页跳转触发
-    LaunchedEffect(uiState.glmNavigateToCredential) {
-        if (uiState.glmNavigateToCredential) {
-            viewModel.consumeGlmCredentialNavigation()
-            onNavigateToGlmCredential()
-        }
-    }
-
     CompositionLocalProvider(LocalHapticFeedbackEnabled provides (themeSettings?.hapticFeedback ?: true)) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Plan Usage") },
+                    title = { Text("MiniMax") },
                     actions = {
                         if (uiState.hasKey) {
                             IconButton(
@@ -81,7 +77,14 @@ fun HomeScreen(
         ) { innerPadding ->
             PullToRefreshBox(
                 isRefreshing = uiState.isLoading,
-                onRefresh = { viewModel.refresh() },
+                onRefresh = {
+                    viewModel.refresh()
+                    // 下拉刷新同时带上 _token 侧的积分与用量
+                    if (insightState.hasWebToken) {
+                        insightViewModel.fetchCredit()
+                        insightViewModel.refreshStats()
+                    }
+                },
                 state = pullToRefreshState,
                 modifier = Modifier
                     .fillMaxSize()
@@ -130,60 +133,46 @@ fun HomeScreen(
                 }
 
                 val generalQuota = uiState.quotas.firstOrNull { it.modelName.equals("general", ignoreCase = true) }
-                val hasMinimaxCard = generalQuota != null
 
-                if (hasMinimaxCard || uiState.hasGlmKey || uiState.glmError != null) {
+                // MiniMax 独立页 — 5小时/本周走 API Key；积分+用量明细走网页 _token。
+                // 两套凭证独立：没配 _token 就只显示前两张卡，不报错。
+                val hasInsight = insightState.hasWebToken
+                if (generalQuota != null || hasInsight) {
                     LazyColumn(
                         state = lazyListState,
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        // --- MiniMax 卡片 ---
+                        item { MinimaxSectionHeader() }
                         if (generalQuota != null) {
-                            item { MinimaxSectionHeader() }
                             item { IntervalCard(quota = generalQuota) }
                             item { WeeklyCard(quota = generalQuota) }
                         }
-
-                        // --- GLM Section ---
-                        item { GlmSectionHeader(level = uiState.glmLevel, hasError = uiState.glmError != null) }
-
-                        when {
-                            !uiState.hasGlmKey -> {
-                                item {
-                                    GlmNotConfiguredCard(
-                                        onClick = { viewModel.requestGlmCredentialNavigation() }
-                                    )
-                                }
+                        // 积分余额（_token）
+                        if (hasInsight) {
+                            item {
+                                CreditCard(
+                                    credit = insightState.credit,
+                                    isLoading = insightState.isCreditLoading,
+                                    error = insightState.creditError,
+                                    onRetry = insightViewModel::fetchCredit
+                                )
                             }
-                            uiState.glmError != null && uiState.glmQuotas.isEmpty() -> {
-                                item {
-                                    GlmErrorCard(
-                                        message = uiState.glmError ?: "未知错误",
-                                        onClick = { viewModel.requestGlmCredentialNavigation() }
-                                    )
-                                }
-                            }
-                            else -> {
-                                // 5小时窗、周窗（过滤掉 MCP 月窗 rawUnit=5）
-                                uiState.glmQuotas.filter { it.rawUnit != 5 }.forEach { quota ->
-                                    item(key = "glm-${quota.rawUnit}") {
-                                        GlmQuotaCard(quota = quota)
-                                    }
-                                }
-                                if (uiState.isGlmLoading) {
-                                    item {
-                                        Box(
-                                            modifier = Modifier.fillMaxWidth().padding(8.dp),
-                                            contentAlignment = Alignment.Center
-                                        ) { CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp) }
-                                    }
-                                }
+                            // 用量明细（_token，四周期分段）
+                            item {
+                                UsageDetailCard(
+                                    period = insightState.period,
+                                    stats = insightState.stats,
+                                    summary = insightState.summary,
+                                    isLoading = insightState.isStatsLoading,
+                                    error = insightState.statsError,
+                                    onSelectPeriod = insightViewModel::selectPeriod
+                                )
                             }
                         }
                     }
-                } else if (uiState.hasKey && uiState.error == null && !uiState.isLoading && !uiState.isGlmLoading) {
+                } else if (uiState.hasKey && uiState.error == null && !uiState.isLoading) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
@@ -284,11 +273,83 @@ private fun WeeklyCard(quota: ModelQuota) {
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp, vertical = 16.dp)
         ) {
-            Text(
-                text = "本周剩余量",
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            // 标题行：左标题 + 右「可重置N次」（点击列过期时间）
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "本周剩余量",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.weight(1f)
+                )
+                val resetCount = quota.resetQuotaCount
+                val resetExpire = quota.resetQuotaExpireMs
+                val resetExpireList = quota.resetQuotaExpireList
+                if (resetCount != null && resetCount > 0) {
+                    val expireRows = remember(resetExpireList, resetExpire) {
+                        if (resetExpireList.isNotEmpty()) {
+                            resetExpireList.map {
+                                Instant.ofEpochMilli(it).atZone(beijingZone).format(expireDateFormatter)
+                            }
+                        } else if (resetExpire != null) {
+                            listOf(
+                                Instant.ofEpochMilli(resetExpire).atZone(beijingZone).format(expireDateFormatter)
+                            )
+                        } else emptyList()
+                    }
+                    // 默认只显示「可重置N次」；点击弹出逐张过期时间，点别处自动消失
+                    var menuOpen by remember { mutableStateOf(false) }
+                    Box {
+                        Text(
+                            text = "可重置${resetCount}次",
+                            fontSize = 11.sp,
+                            color = MaterialTheme.colorScheme.primary,
+                            maxLines = 1,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(6.dp))
+                                .clickable { menuOpen = true }
+                                .padding(horizontal = 4.dp, vertical = 2.dp)
+                        )
+                        DropdownMenu(
+                            expanded = menuOpen,
+                            onDismissRequest = { menuOpen = false },
+                            shape = RoundedCornerShape(16.dp),
+                            modifier = Modifier.background(
+                                MaterialTheme.colorScheme.surfaceContainerHigh,
+                                RoundedCornerShape(16.dp)
+                            )
+                        ) {
+                            if (expireRows.isEmpty()) {
+                                Text(
+                                    text = "有效期未知",
+                                    fontSize = 12.sp,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+                                )
+                            } else {
+                                Text(
+                                    text = "过期时间",
+                                    fontSize = 11.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp)
+                                )
+                                expireRows.forEachIndexed { index, row ->
+                                    Text(
+                                        text = "${superscriptMark(index + 1)} $row",
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        modifier = Modifier.padding(
+                                            start = 22.dp, end = 16.dp, top = 3.dp, bottom = 3.dp
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = range,
@@ -327,6 +388,18 @@ private fun WeeklyCard(quota: ModelQuota) {
         }
     }
 }
+
+/**
+ * 上标序号：1 → ¹，2 → ²，3 → ³ … 超出 9 回退成普通数字。
+ * 与 GlmQuotaCard.superscript 同款实现（那边是 private，这里独立一份避免跨文件耦合）。
+ */
+private fun superscriptMark(n: Int): String {
+    val marks = listOf("⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹")
+    return if (n in 1..9) marks[n] else n.toString()
+}
+
+/** 重置券过期时间展示格式（北京时间） */
+private val expireDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd HH:mm")
 
 /** 把毫秒转成 "X天 Y小时" / "Y小时 Z分" / "Z分" */
 private fun formatRemainsMs(ms: Long): String {

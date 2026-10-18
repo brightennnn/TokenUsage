@@ -7,14 +7,17 @@ import io.github.brightennnn.tokenusage.data.repository.FontSizeRepository
 import io.github.brightennnn.tokenusage.data.repository.ThemeRepository
 import io.github.brightennnn.tokenusage.domain.model.ApiKeyProfile
 import io.github.brightennnn.tokenusage.domain.model.DarkMode
+import io.github.brightennnn.tokenusage.domain.repository.MiniMaxWebTokenRepository
 import io.github.brightennnn.tokenusage.domain.repository.TokenRepository
 import io.github.brightennnn.tokenusage.widget.TokenWidgetUpdater
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,11 +35,16 @@ class SettingsViewModel @Inject constructor(
     private val repository: TokenRepository,
     private val fontSizeRepository: FontSizeRepository,
     private val themeRepository: ThemeRepository,
+    private val miniMaxWebTokenRepository: MiniMaxWebTokenRepository,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
+
+    // MiniMax 网页 Token（仅用于设置主页显示有效期，不做其他用途）
+    val miniMaxWebToken: StateFlow<String?> = miniMaxWebTokenRepository.webToken
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
 
     // 多 Key 管理
     private val _apiKeyProfiles = MutableStateFlow<List<ApiKeyProfile>>(emptyList())

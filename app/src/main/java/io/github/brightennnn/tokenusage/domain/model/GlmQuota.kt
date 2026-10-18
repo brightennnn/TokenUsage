@@ -32,7 +32,17 @@ data class GlmQuota(
     /** 5 小时窗口的实际起点；其他窗口为空。 */
     val windowStartMs: Long? = null,
     /** 5 小时窗口的实际终点；其他窗口为空。 */
-    val windowEndMs: Long? = null
+    val windowEndMs: Long? = null,
+    /**
+     * 可用的「用量重置额度」张数（重置券）。
+     * 5 小时卡（rawUnit=3）取 fiveHourResets.size；本周卡（rawUnit=6）取 weekResets.size；
+     * MCP 月窗不适用，为 null。接口失败时为 null → UI 不显示这行。
+     */
+    val resetQuotaCount: Int? = null,
+    /** 每张重置券的过期时间（毫秒，北京时间解析）；按接口顺序。空列表表示无券或接口失败。 */
+    val resetQuotaExpireList: List<Long> = emptyList(),
+    /** 重置券中最早的一条过期时间（毫秒）。null 表示无券或接口失败。 */
+    val resetQuotaExpireMs: Long? = null
 ) {
     /** 单位标识：3=5小时窗 */
     val isFiveHourWindow: Boolean get() = rawUnit == 3
